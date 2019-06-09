@@ -1,6 +1,5 @@
 
 import Navbar from './Navbar'
+import Logo from './Logo'
 
-export {  Navbar,
-
-}
+export {  Navbar, Logo }

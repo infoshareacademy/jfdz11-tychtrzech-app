@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { header as headerClass, headerNav, headerNavUlLiA } from './Navbar.module.css'
-
+import { header as headerClass, headerNav, headerNavUlLiA, img } from './Navbar.module.css'
+import Logo from '../Logo/Logo'
 
 function Navbar() {
   // 1. stworzyc strukture
@@ -10,10 +10,9 @@ function Navbar() {
   return (
   
     <header className={headerClass}>
-       
+       <Logo/>
         
             <nav className={headerNav}>
-            <NavLink className={headerNavUlLiA} exact to="/start">LOGO</NavLink>
             <NavLink className={headerNavUlLiA} exact to="/add-questions">Add Questions</NavLink>
             <NavLink className={headerNavUlLiA} exact to="/search">Search Questione</NavLink>
             <NavLink className={headerNavUlLiA} exact to="/favourite">Favourite</NavLink>
