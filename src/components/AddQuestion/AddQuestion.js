@@ -1,0 +1,21 @@
+import React from 'react'
+import { addAccount, addAccountToggle, addAccountX, addNewAccount} from './AddQuestion.module.css'
+
+
+function AddQuestion(){
+return <div className={addAccount}>
+        <div className={addAccountToggle}></div> 
+        <span className={addAccountX}>X</span>
+        <h2>Add Question</h2>
+        <form  method="post" target="_blank">
+            <input type="name" id="getName" name="" placeholder="Imię" />
+            <input type="surname" name="" placeholder="Nazwisko"/>
+            <input type="email" name="" placeholder="E-mail" required/>
+            <input type="password" name="" placeholder="Password"/>
+            <input type="submit" className={addNewAccount} name="" value="Add"/>
+        </form>
+    </div>
+}
+
+
+export default AddQuestion
