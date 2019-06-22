@@ -1,7 +1,8 @@
 import React from 'react';
-import {LoginModal, Navbar} from './components/'
+import {LoginForm, Navbar} from './components/'
 import AddQuestion from './scenes/AddQuestions'
 import Dashboard from './scenes/Dashboard'
+import Search from './scenes/Search'
 
 import {
     Route,
@@ -55,7 +56,7 @@ class App extends React.Component {
                     <Switch>
 
                         <Route exact path='/login' render={() => (
-                            <LoginModal login={this.state.login}
+                            <LoginForm login={this.state.login}
                                         tryLogin={this.tryLogin}
                             />
                             )}/>
@@ -67,6 +68,9 @@ class App extends React.Component {
                                       path='/add-questions'
                                       authenticated={this.state.login}
                                       />
+                        <PrivateRoute component={Search}
+                                      path="/search"
+                                      authenticated={this.state.login}/>
                     </Switch>
                 </div>
             </Router>
