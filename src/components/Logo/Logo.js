@@ -2,19 +2,9 @@ import React from 'react'
 import logo from './logo.png';
 import { img as imgClass } from './Logo.module.css'
 
-  function Logo ({
-
- 
-    // onClick = () => history.push('/')
-  }) {
+  function Logo (){
   return (
-    <img className={imgClass}
-      // onClick={onClick}
-      src={logo}
-    //   className={className}
-      alt="logo"
-    //   style={style}
-    />
+    <img className={imgClass} src={logo} alt="logo" />
   )
 }
 export default Logo

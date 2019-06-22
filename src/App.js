@@ -1,39 +1,63 @@
 import React from 'react';
-
 import {Navbar} from './components/'
+import AddQuestion from './scenes/AddQuestions'
+import Dashboard from './scenes/Dashboard'
+
 import {
-  Route,
-  BrowserRouter as Router,
-  Switch,
-  Redirect,
-  NavLink
+    Route,
+    BrowserRouter as Router,
+    Switch,
 } from 'react-router-dom'
-import StartPage from './scenes/StartPage'
-import AddQuestion from './scenes/AddQuestions';
 
 
-export const ADD_QUESTION = '/add-questions'
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            login: false
+        };
+        this.logout = this.logout.bind(this);
+    }
 
+    tryLogin = () => {
+        this.setState(
+            {
+                login: true
+            }
+        )
+    };
 
-function App() {
-  return (
-    <Router> 
-      <div className="App">
-       <Navbar />
-       <Switch>
-      <Route exact path={ADD_QUESTION} component={AddQuestion} />
-    </Switch>
-      </div>
-    </Router>
-   
-  );
+    logout = () => {
+        this.setState(
+            {
+                login: false
+            }
+        )
+    };
+
+    render() {
+        return (
+            <Router>
+                <div className="App">
+                    <Navbar login={this.state.login}
+                    logout={this.logout}/>
+                    <Switch>
+                        <Route exact path='/dashboard' render={() => (
+                            <Dashboard login={this.state.login}
+                            tryLogin={this.tryLogin}
+                            />
+                            )}
+                        />
+                        <Route exact path='/add-questions' render={() => (
+                            <AddQuestion/>
+                        )}
+                        />
+                    </Switch>
+                </div>
+            </Router>
+
+        );
+    }
 }
-
-
-
-
-
-
-
 
 export default App;

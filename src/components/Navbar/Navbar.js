@@ -1,25 +1,40 @@
 import React from "react";
-import { NavLink, Route, Switch } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {
   header as headerClass,
   headerNav,
   headerNavUlLiA,
-  img
 } from "./Navbar.module.css";
 import Logo from "../Logo/Logo";
-import { ADD_QUESTION } from "../../App";
-// import SearchQuestion from '../../scenes/AddQuestions'
 
-function Navbar() {
-  // 1. stworzyc strukture
-  // 2. w App.css ostylowac navbar
-  // 3. wykorzystac <Link to="nazwa-sceny" /> do zmiany Route'a
+function Navbar(props) {
+  const {login, logout} = props;
+
+  if(!login){
+    return (
+        <header className={headerClass}>
+          <Logo />
+          <nav className={headerNav}>
+            <NavLink className={headerNavUlLiA} exact to='/dashboard'>
+              Login
+            </NavLink>
+            <NavLink className={headerNavUlLiA} exact to='/signup'>
+             Signup
+            </NavLink>
+          </nav>
+        </header>
+    )
+  }
+
+
   return (
     <header className={headerClass}>
       <Logo />
-
       <nav className={headerNav}>
-        <NavLink className={headerNavUlLiA} exact to={ADD_QUESTION}>
+        <NavLink className={headerNavUlLiA} exact to='/dashboard'>
+          Dashboard
+        </NavLink>
+        <NavLink className={headerNavUlLiA} exact to='/add-questions'>
           Add Questions
         </NavLink>
         <NavLink className={headerNavUlLiA} exact to="/search">
@@ -33,6 +48,9 @@ function Navbar() {
         </NavLink>
         <NavLink className={headerNavUlLiA} exact to="/best-score">
           Best Score
+        </NavLink>
+        <NavLink className={headerNavUlLiA} exact to="/dashboard" onClick={logout}>
+          Logout
         </NavLink>
       </nav>
     </header>

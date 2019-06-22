@@ -1,10 +1,11 @@
 import React from 'react'
-import { addAccount, addAccountToggle, addAccountX, addNewAccount} from './AddQuestion.module.css'
+import styles from './AddQuestion.module.css'
 
 
 function AddQuestion(){
+    const {addAccount, addAccountToggle, addAccountX, addNewAccount} = styles;
 return <div className={addAccount}>
-        <div className={addAccountToggle}></div> 
+        <div className={addAccountToggle}></div>
         <span className={addAccountX}>X</span>
         <h2>Add Question</h2>
         <form  method="post" target="_blank">
