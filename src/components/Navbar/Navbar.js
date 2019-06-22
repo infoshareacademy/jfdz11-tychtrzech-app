@@ -16,10 +16,6 @@ function Navbar(props) {
           <Logo />
           <nav className={headerNav}>
             <NavLink className={headerNavUlLiA} exact to='/dashboard'>
-              Login
-            </NavLink>
-            <NavLink className={headerNavUlLiA} exact to='/signup'>
-             Signup
             </NavLink>
           </nav>
         </header>

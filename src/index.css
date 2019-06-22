@@ -57,14 +57,13 @@ input.error {
 
 button {
   padding: 10px 15px;
-  background-color: rgb(70, 153, 179);
+  background-color: #466cff;
   color: white;
-  border: 1px solid rgb(70, 153, 179);
-  background-color: 250ms;
+  border: 1px solid rgb(118, 131, 179);
 }
 
 button:hover {
   cursor: pointer;
-  background-color: white;
-  color: rgb(70, 153, 179);
+  background-color: #dfe4ff;
+  color: #466cff;
 }
