@@ -4,7 +4,7 @@
 // import * as Yup from "yup";
 //
 //
-// const LoginModal = (props) => (
+// const LoginForm = (props) => (
 //     <Formik
 //         initialValues={{ email: "", password: "" }}
 //         onSubmit={(values, { setSubmitting }) => {
@@ -72,16 +72,16 @@
 //     </Formik>
 // );
 //
-// export default LoginModal;
+// export default LoginForm;
 
 
 import React from "react";
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import styles from './LoginModal.module.css'
+import styles from './LoginForm.module.css'
 
 
-class LoginModal extends React.Component {
+class LoginForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -145,4 +145,4 @@ class LoginModal extends React.Component {
     }
 }
 
-export default LoginModal
+export default LoginForm

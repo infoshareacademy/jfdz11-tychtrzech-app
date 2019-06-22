@@ -1,0 +1,34 @@
+.holder {
+    width: 70%;
+    margin: 30px auto;
+    padding: 20px;
+}
+.ulSearch {
+    list-style-type: none;
+}
+.liSearch {
+    overflow: hidden;
+    margin: 0 0 20px;
+    border-bottom: 1px solid #ccc;
+    padding: 0 0 20px;
+}
+
+.imgMini{
+    float: left;
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 0 10px 0 0;
+}
+span {
+    display: block;
+    width: 100%;
+    font-weight: bolder;
+}
+.answers {
+     font-weight: normal;
+     font-style: italic;
+     color: #999;
+ }
+
