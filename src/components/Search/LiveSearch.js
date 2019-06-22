@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './LiveSearch.module.css'
 
-let CONTACTS = [
+let QUESTIONS = [
     {
         id: 1,
         name: 'Gdzie byles wczoraj',
@@ -90,14 +90,14 @@ export default class LiveSearch extends React.Component {
         super(props);
         this.state = {
             ...props,
-            displayedContacts: CONTACTS
+            displayedContacts: QUESTIONS
         };
     }
 
 
     searchHandler = (event) =>  {
         let searchjQery = event.target.value.toLowerCase(),
-            displayedContacts = CONTACTS.filter((el) => {
+            displayedContacts = QUESTIONS.filter((el) => {
                 let searchValue = el.name.toLowerCase();
                 return searchValue.indexOf(searchjQery) !== -1;
             });
