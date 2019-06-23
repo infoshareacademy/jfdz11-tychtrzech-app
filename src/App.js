@@ -36,7 +36,7 @@ class App extends React.Component {
             {
                 login: true
             }
-        )
+        );
     };
 
     logout = () => {
@@ -54,7 +54,6 @@ class App extends React.Component {
                     <Navbar login={this.state.login}
                     logout={this.logout}/>
                     <Switch>
-
                         <Route exact path='/login' render={() => (
                             <LoginForm login={this.state.login}
                                         tryLogin={this.tryLogin}
@@ -71,6 +70,7 @@ class App extends React.Component {
                         <PrivateRoute component={Search}
                                       path="/search"
                                       authenticated={this.state.login}/>
+                        <Redirect from='/' to='/login' />
                     </Switch>
                 </div>
             </Router>
