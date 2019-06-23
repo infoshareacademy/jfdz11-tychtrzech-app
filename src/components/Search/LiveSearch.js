@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './LiveSearch.module.css'
+import {Col, Row, Container, Button} from 'react-bootstrap';
 
 let QUESTIONS = [
     {
@@ -15,7 +16,7 @@ let QUESTIONS = [
         image: 'https://cdn0.iconfinder.com/data/icons/ecology-63/64/lab-biology-science-research-chemistry-512.png',
         labelCategory: 'chemistry',
         labelDifficulty: 'medium',
-        addDate: '11.05.2019'
+        createdDate: '11.05.2019'
     },
     {
         id: 2,
@@ -30,7 +31,7 @@ let QUESTIONS = [
         image: 'https://cdn2.iconfinder.com/data/icons/science-flat-style-1/64/science-atom-education-nuclear-physics-atomic-Electron-512.png',
         labelCategory: 'physics',
         labelDifficulty: 'hard',
-        addDate: '11.05.2019'
+        createdDate: '11.05.2019'
     },
     {
         id: 3,
@@ -45,7 +46,7 @@ let QUESTIONS = [
         image: 'https://njctl.org/static/core/img/icon-math.svg',
         labelCategory: 'math',
         labelDifficulty: 'medium',
-        addDate: '11.05.2019'
+        createdDate: '11.05.2019'
     },
     {
         id: 4,
@@ -60,7 +61,7 @@ let QUESTIONS = [
         image: 'https://cdn0.iconfinder.com/data/icons/ecology-63/64/lab-biology-science-research-chemistry-512.png',
         labelCategory: 'chemistry',
         labelDifficulty: 'medium',
-        addDate: '11.05.2019'
+        createdDate: '11.05.2019'
     },
     {
         id: 5,
@@ -74,8 +75,8 @@ let QUESTIONS = [
         },
         image: 'https://njctl.org/static/core/img/icon-math.svg',
         labelCategory: 'math',
-        labelDifficulty: 'medium',
-        addDate: '11.05.2019'
+        labelDifficulty: 'easy',
+        createdDate: '11.05.2019'
     }
 ];
 
@@ -89,12 +90,30 @@ class Contact extends React.Component {
     };
 
     render () {
+        let variant = 'primary';
+        switch (this.props.labelDifficulty){
+            case "easy":
+                variant = 'success';
+                break;
+            case "medium":
+                variant = 'warning';
+                break;
+            case "hard":
+                variant = 'danger'
+        }
+
         return (
-            <li className={styles.liSearch}>
-                <img src={this.props.image} className={styles.imgMini} alt="img"/>
-                <span>{this.props.name}</span>
-                {this.answersSpans(this.props.answers)}
-            </li>
+            <Container className={styles.liSearch}>
+                <Row>
+                    <Col><img src={this.props.image} className={styles.imgMini} alt="img"/>
+                        <span style={{display: 'inline', width: '200px'}}>{this.props.name}</span>
+                        {this.answersSpans(this.props.answers)}
+                    </Col>
+                    <Col><Button style={{marginLeft: '40px'}} variant={variant} size={"sm"}>
+                        {this.props.labelDifficulty}</Button></Col>
+                    <Col><p style={{display: 'inline', color: 'grey'}}> Created on: {this.props.createdDate}</p></Col>
+                </Row>
+            </Container>
         )
     }
 }
@@ -133,7 +152,7 @@ export default class LiveSearch extends React.Component {
                                             answers={el.answers}
                                             labelCategory={el.labelCategory}
                                             labelDifficulty={el.labelDifficulty}
-                                            addDate={el.addDate}
+                                            createdDate={el.createdDate}
                             />
                         })
                     }
