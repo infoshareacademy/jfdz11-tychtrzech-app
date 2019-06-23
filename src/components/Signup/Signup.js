@@ -40,7 +40,7 @@ class Signup extends React.Component {
                             placeholder="Name"
                             autoFocus
                             type="text"
-                            value={this.state.email}
+                            value={this.state.name}
                             onChange={this.handleChange}
                         />
                     </Form.Group>
@@ -49,7 +49,7 @@ class Signup extends React.Component {
                             placeholder="Surname"
                             autoFocus
                             type="email"
-                            value={this.state.email}
+                            value={this.state.surname}
                             onChange={this.handleChange}
                         />
                     </Form.Group>
