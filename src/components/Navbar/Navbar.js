@@ -22,7 +22,6 @@ function Navbar(props) {
     )
   }
 
-
   return (
     <header className={headerClass}>
       <Logo />
@@ -38,9 +37,6 @@ function Navbar(props) {
         </NavLink>
         <NavLink className={headerNavUlLiA} exact to="/favourite">
           Favourite
-        </NavLink>
-        <NavLink className={headerNavUlLiA} exact to="/stats">
-          Stats
         </NavLink>
         <NavLink className={headerNavUlLiA} exact to="/best-score">
           Best Score

@@ -25,6 +25,7 @@ span {
     display: block;
     width: 100%;
     font-weight: bolder;
+    margin: 10px 0 10px 0;
 }
 .answers {
      font-weight: normal;

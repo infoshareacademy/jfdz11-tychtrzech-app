@@ -1,6 +1,5 @@
 import React from 'react';
-import {LoginForm, Navbar} from './components/'
-import AddQuestion from './scenes/AddQuestions'
+import {LoginForm, Navbar, Signup} from './components/'
 import Dashboard from './scenes/Dashboard'
 import Search from './scenes/Search'
 
@@ -59,11 +58,15 @@ class App extends React.Component {
                                         tryLogin={this.tryLogin}
                             />
                             )}/>
+                        <Route exact path='/signup' render={() => (
+                           <Signup/>
+                        )}/>
+
                         <PrivateRoute component={Dashboard}
                                       path="/dashboard"
                                       authenticated={this.state.login}/>
 
-                        <PrivateRoute component={AddQuestion}
+                        <PrivateRoute component={Signup}
                                       path='/add-questions'
                                       authenticated={this.state.login}
                                       />

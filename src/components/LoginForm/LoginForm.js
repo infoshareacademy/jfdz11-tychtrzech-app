@@ -139,6 +139,9 @@ class LoginForm extends React.Component {
                     >
                         Login
                     </Button>
+                    <p style={{marginTop: '10px', display: 'inline' }}> Don't have an account yet?</p>
+                    <Button style={{display: 'inline'}} variant="link"
+                            size={"sm"} href={'/signup'}> Sign in!</Button>
                 </Form>
             </div>
         );
