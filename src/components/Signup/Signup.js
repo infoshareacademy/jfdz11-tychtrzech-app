@@ -1,25 +1,89 @@
-import React from 'react'
-import styles from './Signup.module.css'
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import React from "react";
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+
+class Signup extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            ...props,
+            email: "",
+            password: ""
+        };
+    }
+
+    validateForm() {
+        return this.state.email.length > 0 && this.state.password.length > 0;
+    }
+
+    handleChange = event => {
+        this.setState({
+            [event.target.id]: event.target.value
+        });
+    };
+
+    handleSubmit = event => {
+        event.preventDefault();
+    };
 
 
-function Signup(){
-    const {addAccount, addAccountToggle, addAccountX, addNewAccount} = styles;
-return <div className={addAccount}>
-        <h2>Sign in!</h2>
-        <form  method="post" target="_blank">
-            <input type="name" id="getName" name="" placeholder="Name" />
-            <input type="surname" name="" placeholder="Surname"/>
-            <input type="email" name="" placeholder="E-mail" required/>
-            <input type="password" name="" placeholder="Password"/>
-            <input type="submit" className={addNewAccount} name="" value="Sign in"/>
-            <p style={{marginTop: '10px', display: 'inline' }}> Have account already?</p>
-            <Button style={{display: 'inline'}} variant="link"
-                    size={"sm"} href={'/login'}> Login!</Button>
-        </form>
-    </div>
+    render() {
+        if(this.props.login === true){
+            return null
+        }
+
+        return (
+            <div style={{marginTop: '50px'}}>
+                <Form onSubmit={this.handleSubmit}>
+                    <Form.Group controlId="name">
+                        <Form.Control
+                            placeholder="Name"
+                            autoFocus
+                            type="text"
+                            value={this.state.email}
+                            onChange={this.handleChange}
+                        />
+                    </Form.Group>
+                    <Form.Group controlId="surname">
+                        <Form.Control
+                            placeholder="Surname"
+                            autoFocus
+                            type="email"
+                            value={this.state.email}
+                            onChange={this.handleChange}
+                        />
+                    </Form.Group>
+                    <Form.Group controlId="email">
+                        <Form.Control
+                            placeholder="Email"
+                            autoFocus
+                            type="email"
+                            value={this.state.email}
+                            onChange={this.handleChange}
+                        />
+                    </Form.Group>
+                    <Form.Group controlId="password">
+                        <Form.Control
+                            value={this.state.password}
+                            onChange={this.handleChange}
+                            type="password"
+                            placeholder="Password"
+                        />
+                    </Form.Group>
+                    <Button
+                        block
+                        // disabled={!this.validateForm()}
+                        type="submit"
+                    >
+                        Signup
+                    </Button>
+                    <p style={{marginTop: '30px', display: 'inline' }}> Have account already?</p>
+                    <Button style={{display: 'inline'}} variant="link"
+                            size={"sm"} href={'/login'}> Login!</Button>
+                </Form>
+            </div>
+        );
+    }
 }
-
 
 export default Signup
