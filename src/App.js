@@ -66,12 +66,8 @@ class App extends React.Component {
                                       path="/dashboard"
                                       authenticated={this.state.login}/>
 
-                        <PrivateRoute component={Signup}
-                                      path='/add-questions'
-                                      authenticated={this.state.login}
-                                      />
                         <PrivateRoute component={Search}
-                                      path="/search"
+                                      path="/questions"
                                       authenticated={this.state.login}/>
                         <Redirect from='/' to='/login' />
                     </Switch>

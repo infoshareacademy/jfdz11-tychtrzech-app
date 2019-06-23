@@ -47,7 +47,6 @@ class Signup extends React.Component {
                     <Form.Group controlId="surname">
                         <Form.Control
                             placeholder="Surname"
-                            autoFocus
                             type="email"
                             value={this.state.surname}
                             onChange={this.handleChange}
@@ -56,7 +55,6 @@ class Signup extends React.Component {
                     <Form.Group controlId="email">
                         <Form.Control
                             placeholder="Email"
-                            autoFocus
                             type="email"
                             value={this.state.email}
                             onChange={this.handleChange}

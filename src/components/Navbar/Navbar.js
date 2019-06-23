@@ -9,7 +9,6 @@ import Logo from "../Logo/Logo";
 
 function Navbar(props) {
   const {login, logout} = props;
-
   if(!login){
     return (
         <header className={headerClass}>
@@ -29,14 +28,14 @@ function Navbar(props) {
         <NavLink className={headerNavUlLiA} exact to='/dashboard'>
           Dashboard
         </NavLink>
-        <NavLink className={headerNavUlLiA} exact to='/add-questions'>
-          Add Questions
+        <NavLink className={headerNavUlLiA} exact to='/tests'>
+          Tests
         </NavLink>
-        <NavLink className={headerNavUlLiA} exact to="/search">
-          Search Question
+        <NavLink className={headerNavUlLiA} exact to="/questions">
+          Questions
         </NavLink>
-        <NavLink className={headerNavUlLiA} exact to="/favourite">
-          Favourite
+        <NavLink className={headerNavUlLiA} exact to="/favourites">
+          Favourites
         </NavLink>
         <NavLink className={headerNavUlLiA} exact to="/best-score">
           Best Score
