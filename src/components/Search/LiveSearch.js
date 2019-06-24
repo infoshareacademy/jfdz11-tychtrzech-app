@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './LiveSearch.module.css'
 import {Col, Row, Container, Button} from 'react-bootstrap';
+import AddEditQuestionModal from "../AddEditQuestionModal/AddEditQuestionModal";
 
 let QUESTIONS = [
     {
@@ -83,13 +84,18 @@ let QUESTIONS = [
 class Contact extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            ...props};
     }
+
+
 
     answersSpans = (answers) => {
         return <span className={styles.answers}> {Object.values(answers).join(" ")} </span>
     };
 
     render () {
+
         let variant = 'primary';
         switch (this.props.labelDifficulty){
             case "easy":
@@ -123,7 +129,8 @@ export default class LiveSearch extends React.Component {
         super(props);
         this.state = {
             ...props,
-            displayedContacts: QUESTIONS
+            displayedContacts: QUESTIONS,
+            modalShow: false
         };
     }
 
@@ -140,15 +147,21 @@ export default class LiveSearch extends React.Component {
     };
     render () {
         let contacts = this.state.displayedContacts;
+        let modalClose = () => this.setState({ modalShow: false });
         return (
             <div className={styles.holder}>
                 <div className={styles.flexContainerSearchAdd} style={{textAlign: 'center', marginBottom: '20px',}}>
 
                 <input placeholder={'Search'} autoFocus={true} type="text"
                        className={styles.searchInput} onChange={this.searchHandler}
+                       style={{borderTopRightRadius: '0',
+                           borderBottomRightRadius: '0'}}
                 />
-                <Button variant={"dark"}>Add</Button>
+                <Button variant={"dark"} style={{borderTopLeftRadius: '0', borderBottomLeftRadius: '0'}}
+                        onClick={() => this.setState({ modalShow: true })}>Add</Button>
                 </div>
+
+                <AddEditQuestionModal show={this.state.modalShow} onHide={modalClose} />
 
                 <ul className={styles.ulSearch}>
                     {
