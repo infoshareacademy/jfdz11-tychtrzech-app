@@ -3,6 +3,16 @@
     margin: 30px auto;
     padding: 20px;
 }
+
+.flexContainerSearchAdd {
+    display: flex;
+    margin-bottom: 20px
+}
+
+.searchInput {
+    margin-bottom: 0
+}
+
 .ulSearch {
     list-style-type: none;
 }

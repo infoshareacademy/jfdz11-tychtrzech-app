@@ -109,7 +109,7 @@ class Contact extends React.Component {
                         <span style={{display: 'inline', width: '200px'}}>{this.props.name}</span>
                         {this.answersSpans(this.props.answers)}
                     </Col>
-                    <Col><Button style={{marginLeft: '40px'}} variant={variant} size={"sm"}>
+                    <Col style={{padding: '5px'}}><Button style={{marginLeft: '40px'}} variant={variant} size={"sm"}>
                         {this.props.labelDifficulty}</Button></Col>
                     <Col><p style={{display: 'inline', color: 'grey'}}> Created on: {this.props.createdDate}</p></Col>
                 </Row>
@@ -142,7 +142,14 @@ export default class LiveSearch extends React.Component {
         let contacts = this.state.displayedContacts;
         return (
             <div className={styles.holder}>
-                <input placeholder={'Search'} autoFocus={true} type="text" className={styles.search} onChange={this.searchHandler}/>
+                <div className={styles.flexContainerSearchAdd} style={{textAlign: 'center', marginBottom: '20px',}}>
+
+                <input placeholder={'Search'} autoFocus={true} type="text"
+                       className={styles.searchInput} onChange={this.searchHandler}
+                />
+                <Button variant={"dark"}>Add</Button>
+                </div>
+
                 <ul className={styles.ulSearch}>
                     {
                         contacts.map((el) => {
