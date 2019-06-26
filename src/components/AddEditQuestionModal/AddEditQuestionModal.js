@@ -105,6 +105,26 @@ class AddEditQuestionModal extends React.Component {
         }
     }
 
+    validateForm() {
+        return this.state.name.length > 0
+            && this.state.goodAnswer.length > 0
+            && this.state.badAnswerFirst.length > 0
+            && this.state.labelDifficulty !== 'Difficulty'
+            && this.state.labelCategory !== 'Category'
+    }
+
+    resetData = () =>
+        this.setState ({
+            name: '',
+            goodAnswer: '',
+            badAnswerFirst: '',
+            badAnswerSecond: '',
+            badAnswerThird: '',
+            labelDifficulty: 'Difficulty',
+            labelCategory: 'Category',
+            createdDate: '11.05.2019'
+        });
+
     addQuestion = () => {
         const newQuestion =
             {
@@ -123,7 +143,6 @@ class AddEditQuestionModal extends React.Component {
                     createdDate: '11.11.2019'
             };
         QUESTIONS.push(newQuestion);
-        console.log(newQuestion)
     };
 
     handleChange = event => {
@@ -249,7 +268,13 @@ class AddEditQuestionModal extends React.Component {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={this.props.onHide}>Close</Button>
-                    <Button onClick={()=>this.addQuestion()}>Save</Button>
+                    <Button
+                        disabled={!this.validateForm()}
+                        onClick={()=>{
+                        this.addQuestion();
+                        this.props.onHide();
+                        this.resetData();
+                    }}>Save</Button>
                 </Modal.Footer>
             </Modal>
         );
