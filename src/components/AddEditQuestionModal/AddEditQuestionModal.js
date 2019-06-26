@@ -122,7 +122,8 @@ class AddEditQuestionModal extends React.Component {
             badAnswerThird: '',
             labelDifficulty: 'Difficulty',
             labelCategory: 'Category',
-            createdDate: '11.05.2019'
+            createdDate: '11.05.2019',
+            variantDifficultyStatus: 'Dark',
         });
 
     addQuestion = () => {
