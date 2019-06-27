@@ -126,24 +126,26 @@ class AddEditQuestionModal extends React.Component {
             variantDifficultyStatus: 'Dark',
         });
 
+
     addQuestion = () => {
+        const currentTime = new Date().toLocaleString();
         const newQuestion =
             {
-                    id: 11,
-                    name: this.state.name,
-                    answers: {
-                        goodAnswer: this.state.goodAnswer,
-                        badAnswerFirst: this.state.badAnswerFirst,
-                        badAnswerSecond: this.state.badAnswerSecond,
-                        badAnswerThird: this.state.badAnswerThird,
+                id: 11,
+                name: this.state.name,
+                answers: {
+                    goodAnswer: this.state.goodAnswer,
+                    badAnswerFirst: this.state.badAnswerFirst,
+                    badAnswerSecond: this.state.badAnswerSecond,
+                    badAnswerThird: this.state.badAnswerThird,
 
-                    },
-                    image: 'https://cdn0.iconfinder.com/data/icons/ecology-63/64/lab-biology-science-research-chemistry-512.png',
-                    labelCategory: this.state.labelCategory,
-                    labelDifficulty: this.state.labelDifficulty,
-                    createdDate: '11.11.2019'
+                },
+                image: 'https://cdn0.iconfinder.com/data/icons/ecology-63/64/lab-biology-science-research-chemistry-512.png',
+                labelCategory: this.state.labelCategory,
+                labelDifficulty: this.state.labelDifficulty,
+                createdDate: currentTime
             };
-        QUESTIONS.push(newQuestion);
+        QUESTIONS = [...QUESTIONS, newQuestion];
     };
 
     handleChange = event => {

@@ -3,6 +3,10 @@ import styles from './LiveSearch.module.css'
 import {Col, Row, Container, Button} from 'react-bootstrap';
 import AddEditQuestionModal from "../AddEditQuestionModal/AddEditQuestionModal";
 import {QUESTIONS} from "../AddEditQuestionModal/AddEditQuestionModal";
+import ButtonToolbar from "react-bootstrap/ButtonToolbar";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Dropdown from "react-bootstrap/Dropdown";
+
 
 class Contact extends React.Component {
     constructor(props) {
@@ -39,6 +43,19 @@ class Contact extends React.Component {
                     <Col style={{padding: '5px'}}><Button style={{marginLeft: '40px'}} variant={variant} size={"sm"}>
                         {this.props.labelDifficulty}</Button></Col>
                     <Col><p style={{display: 'inline', color: 'grey'}}> Created on: {this.props.createdDate}</p></Col>
+                    <Col style={{padding: '5px', textAlign: 'right'}}>
+                        <ButtonToolbar style={{paddingRight: '10px', justifyContent: 'flex-end', marginRight: '5px'}} size={'sm'}>
+                            <DropdownButton
+                                drop={'left'}
+                                title={''}
+                                variant={'daasdrk'}
+                                id={'dropdown-variants-difficulty'}
+                                key={'options'}>
+                                <Dropdown.Item eventKey="edit">edit</Dropdown.Item>
+                                <Dropdown.Item eventKey="delete">delete</Dropdown.Item>
+                            </DropdownButton>
+                        </ButtonToolbar>
+                    </Col>
                 </Row>
             </Container>
         )
@@ -54,7 +71,6 @@ export default class LiveSearch extends React.Component {
             modalShow: false
         };
     }
-
 
     searchHandler = (event) =>  {
         let searchjQery = event.target.value.toLowerCase(),
