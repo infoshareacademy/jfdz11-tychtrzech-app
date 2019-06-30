@@ -14,7 +14,6 @@ class AddEditQuestionModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            ...props,
             variantDifficultyStatus: 'Dark',
             name: '',
             goodAnswer: '',
@@ -81,8 +80,9 @@ class AddEditQuestionModal extends React.Component {
     };
 
     render() {
+        const { addQuestion, ...rest } = this.props
         return (
-            <Modal {...this.props} size={"lg"} aria-labelledby="contained-modal-title-vcenter">
+            <Modal {...rest} size={"lg"} aria-labelledby="contained-modal-title-vcenter">
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter" as={'h1'}>
                          Add new question

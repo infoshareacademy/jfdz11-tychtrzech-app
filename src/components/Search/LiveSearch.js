@@ -81,7 +81,7 @@ export default class LiveSearch extends React.Component {
     };
 
     get filteredQuestions () {
-        const { questions, searchPhrase } = this.state
+        const { questions, searchPhrase } = this.state;
         if (searchPhrase === '') {
             return questions
         }
@@ -92,7 +92,7 @@ export default class LiveSearch extends React.Component {
     }
 
     addQuestionToQuestions = question => {
-        const newQuestions = [...questions, question]
+        const newQuestions = [...questions, question];
         this.setState(({
             questions: newQuestions
         }))
