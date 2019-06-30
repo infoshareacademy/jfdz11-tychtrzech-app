@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './LiveSearch.module.css'
 import {Col, Row, Container, Button} from 'react-bootstrap';
 import AddEditQuestionModal from "../AddEditQuestionModal/AddEditQuestionModal";
-import {QUESTIONS} from "../AddEditQuestionModal/AddEditQuestionModal";
+import questions from "../../questions";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -12,7 +12,8 @@ class Contact extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            ...props};
+            ...props
+        };
     }
 
     answersSpans = (answers) => {
@@ -67,23 +68,37 @@ export default class LiveSearch extends React.Component {
         super(props);
         this.state = {
             ...props,
-            displayedContacts: QUESTIONS,
-            modalShow: false
+            modalShow: false,
+            questions: questions,
+            searchPhrase: ''
         };
     }
 
     searchHandler = (event) =>  {
-        let searchjQery = event.target.value.toLowerCase(),
-            displayedContacts = QUESTIONS.filter((el) => {
-                let searchValue = el.name.toLowerCase();
-                return searchValue.indexOf(searchjQery) !== -1;
-            });
         this.setState({
-            displayedContacts: displayedContacts
+            searchPhrase: event.target.value.toLowerCase()
         })
     };
+
+    get filteredQuestions () {
+        const { questions, searchPhrase } = this.state
+        if (searchPhrase === '') {
+            return questions
+        }
+        return questions.filter((el) => {
+            let searchValue = el.name.toLowerCase();
+            return searchValue.indexOf(searchPhrase) !== -1;
+        });
+    }
+
+    addQuestionToQuestions = question => {
+        const newQuestions = [...questions, question]
+        this.setState(({
+            questions: newQuestions
+        }))
+    }
+
     render () {
-        let contacts = this.state.displayedContacts;
         let modalClose = () => this.setState({ modalShow: false });
         return (
             <div className={styles.holder}>
@@ -98,11 +113,11 @@ export default class LiveSearch extends React.Component {
                         onClick={() => this.setState({ modalShow: true })}>Add</Button>
                 </div>
 
-                <AddEditQuestionModal show={this.state.modalShow} onHide={modalClose} />
+                <AddEditQuestionModal show={this.state.modalShow} onHide={modalClose} addQuestion={this.addQuestionToQuestions} />
 
                 <ul className={styles.ulSearch}>
                     {
-                        contacts.map((el) => {
+                        this.filteredQuestions.map((el) => {
                             return <Contact key={el.id}
                                             name={el.name}
                                             image={el.image}
