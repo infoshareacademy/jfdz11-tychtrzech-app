@@ -20,6 +20,7 @@ class AddEditQuestionModal extends React.Component {
     }
 
     validateForm() {
+        console.log(this.props.questionObject.nameQuestion);
         return this.props.questionObject.nameQuestion.length > 0
             && this.props.questionObject.goodAnswer.length > 0
             && this.props.questionObject.badAnswerFirst.length > 0
@@ -39,13 +40,10 @@ class AddEditQuestionModal extends React.Component {
             {
                 id: 12,
                 nameQuestion: this.props.questionObject.nameQuestion,
-                answers: {
-                    goodAnswer: this.props.questionObject.goodAnswer,
-                    badAnswerFirst: this.props.questionObject.badAnswerFirst,
-                    badAnswerSecond: this.props.questionObject.badAnswerSecond,
-                    badAnswerThird: this.props.questionObject.badAnswerThird,
-
-                },
+                goodAnswer: this.props.questionObject.goodAnswer,
+                badAnswerFirst: this.props.questionObject.badAnswerFirst,
+                badAnswerSecond: this.props.questionObject.badAnswerSecond,
+                badAnswerThird: this.props.questionObject.badAnswerThird,
                 image: 'https://cdn0.iconfinder.com/data/icons/ecology-63/64/lab-biology-science-research-chemistry-512.png',
                 labelCategory: this.props.questionObject.labelCategory,
                 labelDifficulty: this.props.questionObject.labelDifficulty,

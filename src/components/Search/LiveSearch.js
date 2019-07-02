@@ -22,25 +22,6 @@ class Contact extends React.Component {
     };
 
     render () {
-
-        // const questionObjecto =
-        //     {
-        //         id: 12,
-        //         nameQuestion: 'testowy name',
-        //         answers: {
-        //             goodAnswer: 'testowy name',
-        //             badAnswerFirst: 'testowy name',
-        //             badAnswerSecond: 'testowy name',
-        //             badAnswerThird: 'testowy name',
-        //
-        //         },
-        //         image: 'https://cdn0.iconfinder.com/data/icons/ecology-63/64/lab-biology-science-research-chemistry-512.png',
-        //         labelCategory: 'testowy name',
-        //         labelDifficulty: 'testowy name',
-        //         createdDate: '22',
-        //         variantDifficultyStatus: 'Dark',
-        //     };
-
         let variant = 'primary';
         switch (this.props.labelDifficulty){
             case "easy":
@@ -53,12 +34,30 @@ class Contact extends React.Component {
                 variant = 'danger'
         }
 
+        const questionObjecto =
+            {
+                id: 12,
+                nameQuestion: this.props.nameQuestion,
+                goodAnswer: this.props.goodAnswer,
+                badAnswerFirst: this.props.badAnswerFirst,
+                badAnswerSecond: this.props.badAnswerSecond,
+                badAnswerThird: this.props.badAnswerThird,
+                image: this.props.image,
+                labelCategory: this.props.labelCategory,
+                labelDifficulty: this.props.labelDifficulty,
+                createdDate: this.props.createdDate,
+                variantDifficultyStatus: variant,
+            };
+
         return (
             <Container className={styles.liSearch}>
                 <Row>
                     <Col><img src={this.props.image} className={styles.imgMini} alt="img"/>
                         <span style={{display: 'inline', width: '200px'}}>{this.props.nameQuestion}</span>
-                        {this.answersSpans(this.props.answers)}
+                        {    this.props.goodAnswer
+                        + '  ' + this.props.badAnswerFirst
+                        + '  ' + this.props.badAnswerSecond
+                        + '  ' + this.props.badAnswerThird }
                     </Col>
                     <Col style={{padding: '5px'}}><Button style={{marginLeft: '40px'}} variant={variant} size={"sm"}>
                         {this.props.labelDifficulty}</Button></Col>
@@ -71,7 +70,7 @@ class Contact extends React.Component {
                                 variant={'none'}
                                 id={'dropdown-variants-difficulty'}
                                 key={'options'}>
-                                <Dropdown.Item eventKey="edit" onClick={()=>this.props.editQuestion()}>edit</Dropdown.Item>
+                                <Dropdown.Item eventKey="edit" onClick={()=>this.props.editQuestion(questionObjecto)}>edit</Dropdown.Item>
                                 <Dropdown.Item eventKey="delete">delete</Dropdown.Item>
                             </DropdownButton>
                         </ButtonToolbar>
@@ -132,13 +131,13 @@ export default class LiveSearch extends React.Component {
     }
 
     editQuestion = (questionObject) => {
-        console.log(questionObject)
-        this.setState(({
-            //questionObject,
-            modalShow: true,
-        }))
+        this.setState({
+            questionObject: questionObject,
+            modalShow: true
+        })
     };
 
+    modalOpen = () => this.setState({ modalShow: true });
 
     setLabelDifficulty = (variant,label) => this.setState({
         questionObject: {
@@ -214,7 +213,10 @@ export default class LiveSearch extends React.Component {
                                             questionObject={this.state.questionObject}
                                             nameQuestion={el.nameQuestion}
                                             image={el.image}
-                                            answers={el.answers}
+                                            goodAnswer={el.goodAnswer}
+                                            badAnswerFirst={el.badAnswerFirst}
+                                            badAnswerSecond={el.badAnswerSecond}
+                                            badAnswerThird={el.badAnswerThird}
                                             labelCategory={el.labelCategory}
                                             labelDifficulty={el.labelDifficulty}
                                             createdDate={el.createdDate}
