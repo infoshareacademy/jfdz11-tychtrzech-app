@@ -1,7 +1,7 @@
 let QUESTIONS = [
     {
         id: 1,
-        name: 'Gdzie byles wczoraj',
+        nameQuestion: 'Gdzie byles wczoraj',
         answers: {
             goodAnswer: 'kino',
             badAnswerFirst: 'kfc',
@@ -16,7 +16,7 @@ let QUESTIONS = [
     },
     {
         id: 2,
-        name: 'Co jadles wczoraj',
+        nameQuestion: 'Co jadles wczoraj',
         answers: {
             goodAnswer: 'kino',
             badAnswerFirst: 'kfc',
@@ -31,7 +31,7 @@ let QUESTIONS = [
     },
     {
         id: 3,
-        name: 'Z kim tanczyles',
+        nameQuestion: 'Z kim tanczyles',
         answers: {
             goodAnswer: 'kino',
             badAnswerFirst: 'kfc',
@@ -46,7 +46,7 @@ let QUESTIONS = [
     },
     {
         id: 4,
-        name: 'Co to swiat',
+        nameQuestion: 'Co to swiat',
         answers: {
             goodAnswer: 'kino',
             badAnswerFirst: 'kfc',
@@ -61,7 +61,7 @@ let QUESTIONS = [
     },
     {
         id: 5,
-        name: 'Jak masz na imie',
+        nameQuestion: 'Jak masz na imie',
         answers: {
             goodAnswer: 'kino',
             badAnswerFirst: 'kfc',

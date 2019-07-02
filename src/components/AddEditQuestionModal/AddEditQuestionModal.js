@@ -14,89 +14,72 @@ class AddEditQuestionModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            variantDifficultyStatus: 'Dark',
-            name: '',
-            goodAnswer: '',
-            badAnswerFirst: '',
-            badAnswerSecond: '',
-            badAnswerThird: '',
-            labelDifficulty: 'Difficulty',
-            labelCategory: 'Category',
-            createdDate: '11.05.2019',
+            ...props,
+            questionObject: this.props.questionObject,
         }
     }
 
     validateForm() {
-        return this.state.name.length > 0
-            && this.state.goodAnswer.length > 0
-            && this.state.badAnswerFirst.length > 0
-            && this.state.labelDifficulty !== 'Difficulty'
-            && this.state.labelCategory !== 'Category'
+        return this.props.questionObject.nameQuestion.length > 0
+            && this.props.questionObject.goodAnswer.length > 0
+            && this.props.questionObject.badAnswerFirst.length > 0
+            && this.props.questionObject.labelDifficulty !== 'Difficulty'
+            && this.props.questionObject.labelCategory !== 'Category'
     }
 
-    resetData = () =>
-        this.setState ({
-            name: '',
-            goodAnswer: '',
-            badAnswerFirst: '',
-            badAnswerSecond: '',
-            badAnswerThird: '',
-            labelDifficulty: 'Difficulty',
-            labelCategory: 'Category',
-            createdDate: '11.05.2019',
-            variantDifficultyStatus: 'Dark',
-        });
-
-
-    handleChange = event => {
-        this.setState({
-            [event.target.id]: event.target.value
-        });
-    };
 
     handleSubmit = event => {
         event.preventDefault();
     };
 
     addQuestion = () => {
+        const {addToListQuestion} = this.props;
         const currentTime = new Date().toLocaleString();
         const newQuestion =
             {
-                id: 11,
-                name: this.state.name,
+                id: 12,
+                nameQuestion: this.props.questionObject.nameQuestion,
                 answers: {
-                    goodAnswer: this.state.goodAnswer,
-                    badAnswerFirst: this.state.badAnswerFirst,
-                    badAnswerSecond: this.state.badAnswerSecond,
-                    badAnswerThird: this.state.badAnswerThird,
+                    goodAnswer: this.props.questionObject.goodAnswer,
+                    badAnswerFirst: this.props.questionObject.badAnswerFirst,
+                    badAnswerSecond: this.props.questionObject.badAnswerSecond,
+                    badAnswerThird: this.props.questionObject.badAnswerThird,
 
                 },
                 image: 'https://cdn0.iconfinder.com/data/icons/ecology-63/64/lab-biology-science-research-chemistry-512.png',
-                labelCategory: this.state.labelCategory,
-                labelDifficulty: this.state.labelDifficulty,
+                labelCategory: this.props.questionObject.labelCategory,
+                labelDifficulty: this.props.questionObject.labelDifficulty,
                 createdDate: currentTime
             };
-        this.props.addQuestion(newQuestion)
+            addToListQuestion(newQuestion)
     };
 
     render() {
-        const { addQuestion, ...rest } = this.props
+        const {
+            addToListQuestion,
+            inputValue,
+            setLabelDifficulty,
+            setLabelCategory,
+            resetData,
+            questionObject,
+            ...rest
+        } = this.props;
         return (
             <Modal {...rest} size={"lg"} aria-labelledby="contained-modal-title-vcenter">
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter" as={'h1'}>
-                         Add new question
+                        Add new question
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={this.handleSubmit}>
-                        <Form.Group controlId="name">
+                        <Form.Group controlId="nameQuestion">
                             <Form.Control
                                 placeholder="Put your question here..."
                                 autoFocus
                                 type="text"
-                                value={this.state.name}
-                                onChange={this.handleChange}
+                                value={questionObject.nameQuestion}
+                                onChange={(event) => this.props.inputValue('nameQuestion', event.target.value)}
                             />
                         </Form.Group>
                         <p style={{marginTop: '30px', display: 'inline'}}> Give us your good answer first, next ones
@@ -105,32 +88,33 @@ class AddEditQuestionModal extends React.Component {
                             <Form.Control
                                 placeholder="Good answer"
                                 type="email"
-                                value={this.state.surname}
-                                onChange={this.handleChange}
+                                value={questionObject.goodAnswer}
+                                onChange={(event) => inputValue('goodAnswer', event.target.value)}
                             />
                         </Form.Group>
                         <Form.Group controlId="badAnswerFirst">
                             <Form.Control
                                 placeholder="Bad answer.."
                                 type="email"
-                                value={this.state.email}
-                                onChange={this.handleChange}
+                                value={questionObject.badAnswerFirst}
+                                onChange={(event) => inputValue('badAnswerFirst', event.target.value)}
                             />
                         </Form.Group>
                         <Form.Group controlId="badAnswerSecond">
                             <Form.Control
                                 placeholder="Bad answer.."
                                 type="email"
-                                value={this.state.email}
-                                onChange={this.handleChange}
+                                value={questionObject.badAnswerSecond}
+                                onChange={(event) => inputValue('badAnswerSecond', event.target.value)}
                             />
                         </Form.Group>
                         <Form.Group controlId="badAnswerThird">
                             <Form.Control
                                 placeholder="Bad answer.."
                                 type="email"
-                                value={this.state.email}
-                                onChange={this.handleChange}
+                                value={questionObject.badAnswerThird}
+                                onChange={(event) => inputValue('badAnswerThird', event.target.value)}
+
                             />
                         </Form.Group>
                         <Container className={styles.liSearch}>
@@ -140,25 +124,22 @@ class AddEditQuestionModal extends React.Component {
                                         difficulty</p>
                                     <ButtonToolbar>
                                         <DropdownButton
-                                            title={this.state.labelDifficulty}
-                                            variant={this.state.variantDifficultyStatus.toLowerCase()}
+                                            title={this.props.questionObject.labelDifficulty}
+                                            variant={this.props.questionObject.variantDifficultyStatus.toLowerCase()}
                                             id={'dropdown-variants-difficulty'}
                                             key={this.state.variantDifficultyStatus}>
-                                            <Dropdown.Item eventKey="easy" onSelect={() => this.setState({
-                                                variantDifficultyStatus: 'Success',
-                                                labelDifficulty: 'easy'
-                                            })}
+                                            <Dropdown.Item eventKey="easy" onSelect={() =>
+                                                setLabelDifficulty('Success', 'easy')
+                                            }
                                             >easy</Dropdown.Item>
-                                            <Dropdown.Item eventKey="medium" onSelect={() => this.setState({
-                                                variantDifficultyStatus: 'Warning',
-                                                labelDifficulty: 'medium',
-                                            })}
+                                            <Dropdown.Item eventKey="medium"
+                                                           onSelect={() =>
+                                                               setLabelDifficulty('Warning', 'medium')
+                                                           }
                                             >medium</Dropdown.Item>
-                                            <Dropdown.Item eventKey="hard" onSelect={() => this.setState({
-                                                variantDifficultyStatus: 'Danger',
-                                                labelDifficulty: 'hard'
-
-                                            })}
+                                            <Dropdown.Item eventKey="hard" onSelect={() =>
+                                                setLabelDifficulty('Danger', 'hard')
+                                            }
                                             >hard</Dropdown.Item>
                                         </DropdownButton>
                                     </ButtonToolbar>
@@ -168,21 +149,21 @@ class AddEditQuestionModal extends React.Component {
                                         Category </p>
                                     <ButtonToolbar>
                                         <DropdownButton
-                                            title={this.state.labelCategory}
+                                            title={this.props.questionObject.labelCategory}
                                             variant={'dark'}
                                             id={'categoryButton'}
                                             key={'labelCategory'}>
                                             <Dropdown.Item eventKey="Math"
-                                                           onSelect={() => this.setState({labelCategory: 'Math'})}
+                                                           onSelect={() => setLabelCategory('Math')}
                                             >Math</Dropdown.Item>
                                             <Dropdown.Item eventKey="Biology"
-                                                           onSelect={() => this.setState({labelCategory: 'Biology'})}
+                                                           onSelect={() => setLabelCategory('Biology')}
                                             >Biology</Dropdown.Item>
                                             <Dropdown.Item eventKey="Chemistry"
-                                                           onSelect={() => this.setState({labelCategory: 'Chemistry'})}
+                                                           onSelect={() => setLabelCategory('Chemistry')}
                                             >Chemistry</Dropdown.Item>
                                             <Dropdown.Item eventKey="Physics"
-                                                           onSelect={() => this.setState({labelCategory: 'Physics'})}
+                                                           onSelect={() => setLabelCategory('Physics')}
                                             >Physics</Dropdown.Item>
                                         </DropdownButton>
                                     </ButtonToolbar>
@@ -192,14 +173,18 @@ class AddEditQuestionModal extends React.Component {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={this.props.onHide}>Close</Button>
+                    <Button variant="secondary"
+                            onClick={() => {
+                                this.props.onHide();
+                                resetData();
+                            }}>Close</Button>
                     <Button
                         disabled={!this.validateForm()}
-                        onClick={()=>{
-                        this.addQuestion();
-                        this.props.onHide();
-                        this.resetData();
-                    }}>Save</Button>
+                        onClick={() => {
+                            this.addQuestion();
+                            this.props.onHide();
+                            resetData();
+                        }}>Save</Button>
                 </Modal.Footer>
             </Modal>
         );

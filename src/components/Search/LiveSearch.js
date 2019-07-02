@@ -12,7 +12,8 @@ class Contact extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            ...props
+            ...props,
+            questionObject: this.props.questionObject,
         };
     }
 
@@ -21,6 +22,24 @@ class Contact extends React.Component {
     };
 
     render () {
+
+        // const questionObjecto =
+        //     {
+        //         id: 12,
+        //         nameQuestion: 'testowy name',
+        //         answers: {
+        //             goodAnswer: 'testowy name',
+        //             badAnswerFirst: 'testowy name',
+        //             badAnswerSecond: 'testowy name',
+        //             badAnswerThird: 'testowy name',
+        //
+        //         },
+        //         image: 'https://cdn0.iconfinder.com/data/icons/ecology-63/64/lab-biology-science-research-chemistry-512.png',
+        //         labelCategory: 'testowy name',
+        //         labelDifficulty: 'testowy name',
+        //         createdDate: '22',
+        //         variantDifficultyStatus: 'Dark',
+        //     };
 
         let variant = 'primary';
         switch (this.props.labelDifficulty){
@@ -38,7 +57,7 @@ class Contact extends React.Component {
             <Container className={styles.liSearch}>
                 <Row>
                     <Col><img src={this.props.image} className={styles.imgMini} alt="img"/>
-                        <span style={{display: 'inline', width: '200px'}}>{this.props.name}</span>
+                        <span style={{display: 'inline', width: '200px'}}>{this.props.nameQuestion}</span>
                         {this.answersSpans(this.props.answers)}
                     </Col>
                     <Col style={{padding: '5px'}}><Button style={{marginLeft: '40px'}} variant={variant} size={"sm"}>
@@ -49,10 +68,10 @@ class Contact extends React.Component {
                             <DropdownButton
                                 drop={'left'}
                                 title={''}
-                                variant={'daasdrk'}
+                                variant={'none'}
                                 id={'dropdown-variants-difficulty'}
                                 key={'options'}>
-                                <Dropdown.Item eventKey="edit">edit</Dropdown.Item>
+                                <Dropdown.Item eventKey="edit" onClick={()=>this.props.editQuestion()}>edit</Dropdown.Item>
                                 <Dropdown.Item eventKey="delete">delete</Dropdown.Item>
                             </DropdownButton>
                         </ButtonToolbar>
@@ -70,9 +89,22 @@ export default class LiveSearch extends React.Component {
             ...props,
             modalShow: false,
             questions: questions,
-            searchPhrase: ''
+            questionObject: {
+                id: '',
+                nameQuestion: '',
+                goodAnswer: '',
+                badAnswerFirst: '',
+                badAnswerSecond: '',
+                badAnswerThird: '',
+                labelDifficulty: 'Difficulty',
+                labelCategory: 'Category',
+                createdDate: '11.05.2019',
+                variantDifficultyStatus: 'Dark',
+            },
+            searchPhrase: '',
         };
     }
+
 
     searchHandler = (event) =>  {
         this.setState({
@@ -86,17 +118,66 @@ export default class LiveSearch extends React.Component {
             return questions
         }
         return questions.filter((el) => {
-            let searchValue = el.name.toLowerCase();
+            let searchValue = el.nameQuestion.toLowerCase();
             return searchValue.indexOf(searchPhrase) !== -1;
         });
     }
 
-    addQuestionToQuestions = question => {
+    addToListQuestion = (question) => {
+        console.log('to jest nowe pytanie'  + question);
         const newQuestions = [...questions, question];
         this.setState(({
             questions: newQuestions
         }))
     }
+
+    editQuestion = (questionObject) => {
+        console.log(questionObject)
+        this.setState(({
+            //questionObject,
+            modalShow: true,
+        }))
+    };
+
+
+    setLabelDifficulty = (variant,label) => this.setState({
+        questionObject: {
+            ...this.state.questionObject,
+            variantDifficultyStatus: variant,
+            labelDifficulty: label,
+        }
+    });
+
+    setLabelCategory = (c) => this.setState({
+        questionObject: {
+            ...this.state.questionObject,
+            labelCategory: c,
+        }
+    });
+
+    inputValue = (propsName, value) => {
+        this.setState({
+            questionObject:{
+                ...this.state.questionObject,
+                [propsName]: value
+            }
+        });
+    };
+
+    resetData = () =>
+        this.setState ({
+            questionObject: {
+                nameQuestion: '',
+                goodAnswer: '',
+                badAnswerFirst: '',
+                badAnswerSecond: '',
+                badAnswerThird: '',
+                labelDifficulty: 'Difficulty',
+                labelCategory: 'Category',
+                createdDate: '11.05.2019',
+                variantDifficultyStatus: 'Dark',
+            }
+        });
 
     render () {
         let modalClose = () => this.setState({ modalShow: false });
@@ -113,13 +194,25 @@ export default class LiveSearch extends React.Component {
                         onClick={() => this.setState({ modalShow: true })}>Add</Button>
                 </div>
 
-                <AddEditQuestionModal show={this.state.modalShow} onHide={modalClose} addQuestion={this.addQuestionToQuestions} />
+                <AddEditQuestionModal questionObject={this.state.questionObject}
+                                      show={this.state.modalShow}
+                                      onHide={modalClose}
+                                      addToListQuestion={this.addToListQuestion}
+                                      resetData={this.resetData}
+                                      setLabelDifficulty={this.setLabelDifficulty}
+                                      setLabelCategory={this.setLabelCategory}
+                                      inputValue={this.inputValue}
+
+                />
 
                 <ul className={styles.ulSearch}>
                     {
                         this.filteredQuestions.map((el) => {
-                            return <Contact key={el.id}
-                                            name={el.name}
+                            return <Contact
+                                            editQuestion={this.editQuestion}
+                                            key={el.id}
+                                            questionObject={this.state.questionObject}
+                                            nameQuestion={el.nameQuestion}
                                             image={el.image}
                                             answers={el.answers}
                                             labelCategory={el.labelCategory}
