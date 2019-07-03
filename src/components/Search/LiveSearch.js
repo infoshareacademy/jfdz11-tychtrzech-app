@@ -6,6 +6,7 @@ import questions from "../../questions";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
+import {randomHash} from "../../questions";
 
 
 class Contact extends React.Component {
@@ -33,10 +34,9 @@ class Contact extends React.Component {
             case "hard":
                 variant = 'danger'
         }
-
         const questionObjecto =
             {
-                id: 12,
+                id: this.props.id,
                 nameQuestion: this.props.nameQuestion,
                 goodAnswer: this.props.goodAnswer,
                 badAnswerFirst: this.props.badAnswerFirst,
@@ -71,7 +71,7 @@ class Contact extends React.Component {
                                 id={'dropdown-variants-difficulty'}
                                 key={'options'}>
                                 <Dropdown.Item eventKey="edit" onClick={()=>this.props.editQuestion(questionObjecto)}>edit</Dropdown.Item>
-                                <Dropdown.Item eventKey="delete">delete</Dropdown.Item>
+                                <Dropdown.Item eventKey="delete" onClick={()=>this.props.deleteQuestion(this.props.id)}>delete</Dropdown.Item>
                             </DropdownButton>
                         </ButtonToolbar>
                     </Col>
@@ -88,6 +88,7 @@ export default class LiveSearch extends React.Component {
             ...props,
             modalShow: false,
             questions: questions,
+            mode: "Add",
             questionObject: {
                 id: '',
                 nameQuestion: '',
@@ -128,16 +129,24 @@ export default class LiveSearch extends React.Component {
         this.setState(({
             questions: newQuestions
         }))
-    }
+    };
 
     editQuestion = (questionObject) => {
         this.setState({
             questionObject: questionObject,
+            mode: "Update",
             modalShow: true
         })
     };
 
-    modalOpen = () => this.setState({ modalShow: true });
+    deleteQuestion = (idQuestion) => {
+        const newQuestions = questions.filter(function (obj) {
+            return obj.id !== idQuestion;
+        });
+        this.setState(({
+            questions: newQuestions
+        }))
+    };
 
     setLabelDifficulty = (variant,label) => this.setState({
         questionObject: {
@@ -190,10 +199,11 @@ export default class LiveSearch extends React.Component {
                            borderBottomRightRadius: '0'}}
                 />
                 <Button variant={"dark"} style={{borderTopLeftRadius: '0', borderBottomLeftRadius: '0'}}
-                        onClick={() => this.setState({ modalShow: true })}>Add</Button>
+                        onClick={() => this.setState({ mode: "Add", modalShow: true, })}>Add</Button>
                 </div>
 
                 <AddEditQuestionModal questionObject={this.state.questionObject}
+                                      mode={this.state.mode}
                                       show={this.state.modalShow}
                                       onHide={modalClose}
                                       addToListQuestion={this.addToListQuestion}
@@ -207,10 +217,11 @@ export default class LiveSearch extends React.Component {
                 <ul className={styles.ulSearch}>
                     {
                         this.filteredQuestions.map((el) => {
-                            return <Contact
+                            return <Contact deleteQuestion={this.deleteQuestion}
                                             editQuestion={this.editQuestion}
                                             key={el.id}
                                             questionObject={this.state.questionObject}
+                                            id={el.id}
                                             nameQuestion={el.nameQuestion}
                                             image={el.image}
                                             goodAnswer={el.goodAnswer}

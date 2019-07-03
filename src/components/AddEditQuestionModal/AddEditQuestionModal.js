@@ -9,6 +9,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import styles from './AddEditQuestionModal.module.css'
 import DropdownButton from "react-bootstrap/DropdownButton";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
+import {randomHash} from "../../questions";
 
 class AddEditQuestionModal extends React.Component {
     constructor(props) {
@@ -38,7 +39,7 @@ class AddEditQuestionModal extends React.Component {
         const currentTime = new Date().toLocaleString();
         const newQuestion =
             {
-                id: 12,
+                id: randomHash(),
                 nameQuestion: this.props.questionObject.nameQuestion,
                 goodAnswer: this.props.questionObject.goodAnswer,
                 badAnswerFirst: this.props.questionObject.badAnswerFirst,
@@ -66,7 +67,7 @@ class AddEditQuestionModal extends React.Component {
             <Modal {...rest} size={"lg"} aria-labelledby="contained-modal-title-vcenter">
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter" as={'h1'}>
-                        Add new question
+                        {this.props.mode} question
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -182,7 +183,7 @@ class AddEditQuestionModal extends React.Component {
                             this.addQuestion();
                             this.props.onHide();
                             resetData();
-                        }}>Save</Button>
+                        }}>{this.props.mode}</Button>
                 </Modal.Footer>
             </Modal>
         );

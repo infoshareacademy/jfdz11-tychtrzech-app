@@ -1,6 +1,10 @@
+export function randomHash() {
+    return Math.random().toString(36).substr(2, 20)
+}
+
 let QUESTIONS = [
     {
-        id: 1,
+        id: randomHash(),
         nameQuestion: 'Gdzie byles wczoraj',
         goodAnswer: 'kino',
         badAnswerFirst: 'kfc',
@@ -12,7 +16,7 @@ let QUESTIONS = [
         createdDate: '11.05.2019'
     },
     {
-        id: 2,
+        id: randomHash(),
         nameQuestion: 'Co jadles wczoraj',
         goodAnswer: 'kino',
         badAnswerFirst: 'kfc',
@@ -24,7 +28,7 @@ let QUESTIONS = [
         createdDate: '11.05.2019'
     },
     {
-        id: 3,
+        id: randomHash(),
         nameQuestion: 'Z kim tanczyles',
         goodAnswer: 'kino',
         badAnswerFirst: 'kfc',
@@ -36,7 +40,7 @@ let QUESTIONS = [
         createdDate: '11.05.2019'
     },
     {
-        id: 4,
+        id: randomHash(),
         nameQuestion: 'Co to swiat',
         goodAnswer: 'kino',
         badAnswerFirst: 'kfc',
@@ -48,7 +52,7 @@ let QUESTIONS = [
         createdDate: '11.05.2019'
     },
     {
-        id: 5,
+        id: randomHash(),
         nameQuestion: 'Jak masz na imie',
         goodAnswer: 'kino',
         badAnswerFirst: 'kfc',
