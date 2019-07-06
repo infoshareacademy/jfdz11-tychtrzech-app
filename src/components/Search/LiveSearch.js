@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './LiveSearch.module.css'
 import {Col, Row, Container, Button} from 'react-bootstrap';
 import AddEditQuestionModal from "../AddEditQuestionModal/AddEditQuestionModal";
-import questions from "../../questions";
+import questions, {setCategoryImage} from "../../questions";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -174,6 +174,7 @@ export default class LiveSearch extends React.Component {
         questionObject: {
             ...this.state.questionObject,
             labelCategory: c,
+            image: setCategoryImage(c)
         }
     });
 

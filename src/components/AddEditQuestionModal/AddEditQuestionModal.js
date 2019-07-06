@@ -9,7 +9,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import styles from './AddEditQuestionModal.module.css'
 import DropdownButton from "react-bootstrap/DropdownButton";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
-import {randomHash} from "../../questions";
+import {randomHash, setCategoryImage} from "../../questions";
 
 class AddEditQuestionModal extends React.Component {
     constructor(props) {
@@ -45,7 +45,7 @@ class AddEditQuestionModal extends React.Component {
                 badAnswerFirst: this.props.questionObject.badAnswerFirst,
                 badAnswerSecond: this.props.questionObject.badAnswerSecond,
                 badAnswerThird: this.props.questionObject.badAnswerThird,
-                image: 'https://cdn0.iconfinder.com/data/icons/ecology-63/64/lab-biology-science-research-chemistry-512.png',
+                image: setCategoryImage(this.props.questionObject.labelCategory),
                 labelCategory: this.props.questionObject.labelCategory,
                 labelDifficulty: this.props.questionObject.labelDifficulty,
                 createdDate: currentTime
