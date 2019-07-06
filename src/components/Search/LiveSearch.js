@@ -6,10 +6,8 @@ import questions from "../../questions";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
-import {randomHash} from "../../questions";
 
-
-class Contact extends React.Component {
+class Question extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -22,9 +20,9 @@ class Contact extends React.Component {
         return <span className={styles.answers}> {Object.values(answers).join(" ")} </span>
     };
 
-    render () {
+    render() {
         let variant = 'primary';
-        switch (this.props.labelDifficulty){
+        switch (this.props.labelDifficulty) {
             case "easy":
                 variant = 'success';
                 break;
@@ -54,24 +52,27 @@ class Contact extends React.Component {
                 <Row>
                     <Col><img src={this.props.image} className={styles.imgMini} alt="img"/>
                         <span style={{display: 'inline', width: '200px'}}>{this.props.nameQuestion}</span>
-                        {    this.props.goodAnswer
+                        {this.props.goodAnswer
                         + '  ' + this.props.badAnswerFirst
                         + '  ' + this.props.badAnswerSecond
-                        + '  ' + this.props.badAnswerThird }
+                        + '  ' + this.props.badAnswerThird}
                     </Col>
                     <Col style={{padding: '5px'}}><Button style={{marginLeft: '40px'}} variant={variant} size={"sm"}>
                         {this.props.labelDifficulty}</Button></Col>
                     <Col><p style={{display: 'inline', color: 'grey'}}> Created on: {this.props.createdDate}</p></Col>
                     <Col style={{padding: '5px', textAlign: 'right'}}>
-                        <ButtonToolbar style={{paddingRight: '10px', justifyContent: 'flex-end', marginRight: '5px'}} size={'sm'}>
+                        <ButtonToolbar style={{paddingRight: '10px', justifyContent: 'flex-end', marginRight: '5px'}}
+                                       size={'sm'}>
                             <DropdownButton
                                 drop={'left'}
                                 title={''}
                                 variant={'none'}
                                 id={'dropdown-variants-difficulty'}
                                 key={'options'}>
-                                <Dropdown.Item eventKey="edit" onClick={()=>this.props.editQuestion(questionObjecto)}>edit</Dropdown.Item>
-                                <Dropdown.Item eventKey="delete" onClick={()=>this.props.deleteQuestion(this.props.id)}>delete</Dropdown.Item>
+                                <Dropdown.Item eventKey="edit"
+                                               onClick={() => this.props.openEditQuestion(questionObjecto)}>edit</Dropdown.Item>
+                                <Dropdown.Item eventKey="delete"
+                                               onClick={() => this.props.deleteQuestion(this.props.id)}>delete</Dropdown.Item>
                             </DropdownButton>
                         </ButtonToolbar>
                     </Col>
@@ -106,14 +107,14 @@ export default class LiveSearch extends React.Component {
     }
 
 
-    searchHandler = (event) =>  {
+    searchHandler = (event) => {
         this.setState({
             searchPhrase: event.target.value.toLowerCase()
         })
     };
 
-    get filteredQuestions () {
-        const { questions, searchPhrase } = this.state;
+    get filteredQuestions() {
+        const {questions, searchPhrase} = this.state;
         if (searchPhrase === '') {
             return questions
         }
@@ -124,14 +125,14 @@ export default class LiveSearch extends React.Component {
     }
 
     addToListQuestion = (question) => {
-        console.log('to jest nowe pytanie'  + question);
-        const newQuestions = [...questions, question];
+        let {questions} = this.state;
+        questions = [...questions, question];
         this.setState(({
-            questions: newQuestions
+            questions
         }))
     };
 
-    editQuestion = (questionObject) => {
+    openEditQuestion = (questionObject) => {
         this.setState({
             questionObject: questionObject,
             mode: "Update",
@@ -139,16 +140,29 @@ export default class LiveSearch extends React.Component {
         })
     };
 
-    deleteQuestion = (idQuestion) => {
-        const newQuestions = questions.filter(function (obj) {
-            return obj.id !== idQuestion;
-        });
+    editQuestion = (questionObject) => {
+        let {questions} = this.state;
+        const index = questions.findIndex(
+            question => question.id === questionObject.id
+        );
+        questions[index] = questionObject;
+
         this.setState(({
-            questions: newQuestions
+            questions
         }))
     };
 
-    setLabelDifficulty = (variant,label) => this.setState({
+    deleteQuestion = (idQuestion) => {
+        let {questions} = this.state;
+        questions = questions.filter(function (obj) {
+            return obj.id !== idQuestion;
+        });
+        this.setState(({
+            questions
+        }))
+    };
+
+    setLabelDifficulty = (variant, label) => this.setState({
         questionObject: {
             ...this.state.questionObject,
             variantDifficultyStatus: variant,
@@ -165,7 +179,7 @@ export default class LiveSearch extends React.Component {
 
     inputValue = (propsName, value) => {
         this.setState({
-            questionObject:{
+            questionObject: {
                 ...this.state.questionObject,
                 [propsName]: value
             }
@@ -173,7 +187,7 @@ export default class LiveSearch extends React.Component {
     };
 
     resetData = () =>
-        this.setState ({
+        this.setState({
             questionObject: {
                 nameQuestion: '',
                 goodAnswer: '',
@@ -187,22 +201,25 @@ export default class LiveSearch extends React.Component {
             }
         });
 
-    render () {
-        let modalClose = () => this.setState({ modalShow: false });
+    render() {
+        let modalClose = () => this.setState({modalShow: false});
         return (
             <div className={styles.holder}>
                 <div className={styles.flexContainerSearchAdd} style={{textAlign: 'center', marginBottom: '20px',}}>
 
-                <input placeholder={'Search'} autoFocus={true} type="text"
-                       className={styles.searchInput} onChange={this.searchHandler}
-                       style={{borderTopRightRadius: '0',
-                           borderBottomRightRadius: '0'}}
-                />
-                <Button variant={"dark"} style={{borderTopLeftRadius: '0', borderBottomLeftRadius: '0'}}
-                        onClick={() => this.setState({ mode: "Add", modalShow: true, })}>Add</Button>
+                    <input placeholder={'Search'} autoFocus={true} type="text"
+                           className={styles.searchInput} onChange={this.searchHandler}
+                           style={{
+                               borderTopRightRadius: '0',
+                               borderBottomRightRadius: '0'
+                           }}
+                    />
+                    <Button variant={"dark"} style={{borderTopLeftRadius: '0', borderBottomLeftRadius: '0'}}
+                            onClick={() => this.setState({mode: "Add", modalShow: true,})}>Add</Button>
                 </div>
 
-                <AddEditQuestionModal questionObject={this.state.questionObject}
+                <AddEditQuestionModal editQuestion={this.editQuestion}
+                                      questionObject={this.state.questionObject}
                                       mode={this.state.mode}
                                       show={this.state.modalShow}
                                       onHide={modalClose}
@@ -217,20 +234,21 @@ export default class LiveSearch extends React.Component {
                 <ul className={styles.ulSearch}>
                     {
                         this.filteredQuestions.map((el) => {
-                            return <Contact deleteQuestion={this.deleteQuestion}
-                                            editQuestion={this.editQuestion}
-                                            key={el.id}
-                                            questionObject={this.state.questionObject}
-                                            id={el.id}
-                                            nameQuestion={el.nameQuestion}
-                                            image={el.image}
-                                            goodAnswer={el.goodAnswer}
-                                            badAnswerFirst={el.badAnswerFirst}
-                                            badAnswerSecond={el.badAnswerSecond}
-                                            badAnswerThird={el.badAnswerThird}
-                                            labelCategory={el.labelCategory}
-                                            labelDifficulty={el.labelDifficulty}
-                                            createdDate={el.createdDate}
+                            return <Question
+                                deleteQuestion={this.deleteQuestion}
+                                openEditQuestion={this.openEditQuestion}
+                                key={el.id}
+                                questionObject={this.state.questionObject}
+                                id={el.id}
+                                nameQuestion={el.nameQuestion}
+                                image={el.image}
+                                goodAnswer={el.goodAnswer}
+                                badAnswerFirst={el.badAnswerFirst}
+                                badAnswerSecond={el.badAnswerSecond}
+                                badAnswerThird={el.badAnswerThird}
+                                labelCategory={el.labelCategory}
+                                labelDifficulty={el.labelDifficulty}
+                                createdDate={el.createdDate}
                             />
                         })
                     }
@@ -238,5 +256,5 @@ export default class LiveSearch extends React.Component {
             </div>
         )
     }
-};
+}
 

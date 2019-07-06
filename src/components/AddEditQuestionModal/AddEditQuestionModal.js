@@ -55,6 +55,7 @@ class AddEditQuestionModal extends React.Component {
 
     render() {
         const {
+            editQuestion,
             addToListQuestion,
             inputValue,
             setLabelDifficulty,
@@ -63,6 +64,7 @@ class AddEditQuestionModal extends React.Component {
             questionObject,
             ...rest
         } = this.props;
+
         return (
             <Modal {...rest} size={"lg"} aria-labelledby="contained-modal-title-vcenter">
                 <Modal.Header closeButton>
@@ -180,7 +182,7 @@ class AddEditQuestionModal extends React.Component {
                     <Button
                         disabled={!this.validateForm()}
                         onClick={() => {
-                            this.addQuestion();
+                            this.props.mode === 'Add' ? this.addQuestion() : editQuestion(questionObject);
                             this.props.onHide();
                             resetData();
                         }}>{this.props.mode}</Button>
