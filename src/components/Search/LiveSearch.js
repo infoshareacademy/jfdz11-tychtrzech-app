@@ -116,17 +116,6 @@ export default class LiveSearch extends React.Component {
         })
     };
 
-    get filteredQuestions() {
-        const {questions, searchPhrase} = this.state;
-        if (searchPhrase === '') {
-            return questions
-        }
-        return questions.filter((el) => {
-            let searchValue = el.nameQuestion.toLowerCase();
-            return searchValue.indexOf(searchPhrase) !== -1;
-        });
-    }
-
     addToListQuestion = (question) => {
         let {questions} = this.state;
         questions = [...questions, question];
