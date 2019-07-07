@@ -26,7 +26,8 @@ let QUESTIONS = [
         labelCategory: 'Chemistry',
         image: setCategoryImage('Chemistry'),
         labelDifficulty: 'medium',
-        createdDate: '11.05.2019'
+        createdDate: '11.05.2019',
+        favorite: false
     },
     {
         id: randomHash(),
@@ -38,7 +39,8 @@ let QUESTIONS = [
         image: setCategoryImage("Physics"),
         labelCategory: 'Physics',
         labelDifficulty: 'hard',
-        createdDate: '11.05.2019'
+        createdDate: '11.05.2019',
+        favorite: false
     },
     {
         id: randomHash(),
@@ -50,7 +52,8 @@ let QUESTIONS = [
         image: setCategoryImage("Math"),
         labelCategory: 'Math',
         labelDifficulty: 'medium',
-        createdDate: '11.05.2019'
+        createdDate: '11.05.2019',
+        favorite: false
     },
     {
         id: randomHash(),
@@ -62,7 +65,8 @@ let QUESTIONS = [
         image: setCategoryImage("Chemistry"),
         labelCategory: 'Chemistry',
         labelDifficulty: 'easy',
-        createdDate: '11.05.2019'
+        createdDate: '11.05.2019',
+        favorite: false
     },
     {
         id: randomHash(),
@@ -74,7 +78,8 @@ let QUESTIONS = [
         labelCategory: 'Chemistry',
         image: setCategoryImage('Chemistry'),
         labelDifficulty: 'medium',
-        createdDate: '11.05.2019'
+        createdDate: '11.05.2019',
+        favorite: false
     },
     {
         id: randomHash(),
@@ -86,7 +91,8 @@ let QUESTIONS = [
         image: setCategoryImage("Physics"),
         labelCategory: 'Physics',
         labelDifficulty: 'hard',
-        createdDate: '11.05.2019'
+        createdDate: '11.05.2019',
+        favorite: false
     },
     {
         id: randomHash(),
@@ -98,7 +104,8 @@ let QUESTIONS = [
         image: setCategoryImage("Math"),
         labelCategory: 'Math',
         labelDifficulty: 'medium',
-        createdDate: '11.05.2019'
+        createdDate: '11.05.2019',
+        favorite: false
     },
     {
         id: randomHash(),
@@ -110,7 +117,8 @@ let QUESTIONS = [
         image: setCategoryImage("Biology"),
         labelCategory: 'Biology',
         labelDifficulty: 'medium',
-        createdDate: '11.05.2019'
+        createdDate: '11.05.2019',
+        favorite: false
     },
     {
         id: randomHash(),
@@ -122,7 +130,8 @@ let QUESTIONS = [
         image: setCategoryImage("Biology"),
         labelCategory: 'Biology',
         labelDifficulty: 'medium',
-        createdDate: '11.05.2019'
+        createdDate: '11.05.2019',
+        favorite: false
     },
     {
         id: randomHash(),
@@ -134,7 +143,8 @@ let QUESTIONS = [
         image: setCategoryImage("Chemistry"),
         labelCategory: 'Chemistry',
         labelDifficulty: 'easy',
-        createdDate: '11.05.2019'
+        createdDate: '11.05.2019',
+        favorite: false
     },
     {
         id: randomHash(),
@@ -146,7 +156,8 @@ let QUESTIONS = [
         labelCategory: 'Chemistry',
         image: setCategoryImage('Chemistry'),
         labelDifficulty: 'medium',
-        createdDate: '11.05.2019'
+        createdDate: '11.05.2019',
+        favorite: false
     },
     {
         id: randomHash(),
@@ -158,7 +169,8 @@ let QUESTIONS = [
         image: setCategoryImage("Physics"),
         labelCategory: 'Physics',
         labelDifficulty: 'hard',
-        createdDate: '11.05.2019'
+        createdDate: '11.05.2019',
+        favorite: false
     },
     {
         id: randomHash(),
@@ -170,7 +182,8 @@ let QUESTIONS = [
         image: setCategoryImage("Math"),
         labelCategory: 'Math',
         labelDifficulty: 'medium',
-        createdDate: '11.05.2019'
+        createdDate: '11.05.2019',
+        favorite: false
     },
     {
         id: randomHash(),
@@ -182,7 +195,8 @@ let QUESTIONS = [
         image: setCategoryImage("Biology"),
         labelCategory: 'Biology',
         labelDifficulty: 'medium',
-        createdDate: '11.05.2019'
+        createdDate: '11.05.2019',
+        favorite: false
     },
     {
         id: randomHash(),
@@ -194,7 +208,8 @@ let QUESTIONS = [
         image: setCategoryImage("Chemistry"),
         labelCategory: 'Chemistry',
         labelDifficulty: 'easy',
-        createdDate: '11.05.2019'
+        createdDate: '11.05.2019',
+        favorite: false
     }
 ];
 

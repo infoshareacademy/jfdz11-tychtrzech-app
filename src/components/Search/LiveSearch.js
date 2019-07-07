@@ -18,8 +18,12 @@ class Question extends React.Component {
         };
     }
 
-    answersSpans = (answers) => {
-        return <span className={styles.answers}> {Object.values(answers).join(" ")} </span>
+    favoriteStar = () => {
+        return this.props.favorite ? <span> hi </span> : <span> bye </span>
+    };
+
+    textFavoriteOnDropdown = () => {
+      return this.props.favorite ? 'unfavourite' : 'add favorite'
     };
 
     render() {
@@ -47,22 +51,27 @@ class Question extends React.Component {
                 labelDifficulty: this.props.labelDifficulty,
                 createdDate: this.props.createdDate,
                 variantDifficultyStatus: variant,
+                favorite: this.props.favorite
             };
 
         return (
             <Container className={styles.liSearch}>
                 <Row>
-                    <Col><img src={this.props.image} className={styles.imgMini} alt="img"/>
-                        <span style={{display: 'inline', width: '200px'}}>{this.props.nameQuestion}</span>
-                        {this.props.goodAnswer
-                        + '  ' + this.props.badAnswerFirst
-                        + '  ' + this.props.badAnswerSecond
-                        + '  ' + this.props.badAnswerThird}
+                    <Col style={{flexGrow: '1'}}>
+                        <span onClick={() => {
+                            this.props.editQuestion(this.props.handleClickStar(questionObjecto))
+                        }}>{this.favoriteStar()}</span>
                     </Col>
-                    <Col style={{padding: '5px'}}><Button style={{marginLeft: '40px'}} variant={variant} size={"sm"}>
+                    <Col style={{flexGrow: '10'}}><img src={this.props.image} className={styles.imgMini} alt="img"/>
+                        <span style={{display: 'inline', width: '200px'}}>{this.props.nameQuestion}</span>
+                        <p></p>
+                        <p> {this.props.goodAnswer}  {this.props.badAnswerFirst}</p>
+                        <p>{this.props.badAnswerSecond} {this.props.badAnswerThird}</p>
+                    </Col>
+                    <Col style={{padding: '5px', width: '5%', flexGrow: '8'}}><Button style={{marginLeft: '40px'}} variant={variant} size={"sm"}>
                         {this.props.labelDifficulty}</Button></Col>
-                    <Col><p style={{display: 'inline', color: 'grey'}}> Created on: {this.props.createdDate}</p></Col>
-                    <Col style={{padding: '5px', textAlign: 'right'}}>
+                    <Col style={{flexGrow: '9'}}><p style={{display: 'inline', color: 'grey'}}> Created on: {this.props.createdDate}</p></Col>
+                    <Col style={{padding: '5px', textAlign: 'right', flexGrow: '1'}}>
                         <ButtonToolbar style={{paddingRight: '10px', justifyContent: 'flex-end', marginRight: '5px'}}
                                        size={'sm'}>
                             <DropdownButton
@@ -75,6 +84,11 @@ class Question extends React.Component {
                                                onClick={() => this.props.openEditQuestion(questionObjecto)}>edit</Dropdown.Item>
                                 <Dropdown.Item eventKey="delete"
                                                onClick={() => this.props.deleteQuestion(this.props.id)}>delete</Dropdown.Item>
+                                <Dropdown.Item eventKey="favorite"
+                                               onClick={() => {
+                                                   this.props.editQuestion(this.props.handleClickStar(questionObjecto))
+                                               }
+                                               }>{this.textFavoriteOnDropdown()}</Dropdown.Item>
                             </DropdownButton>
                         </ButtonToolbar>
                     </Col>
@@ -103,11 +117,11 @@ export default class LiveSearch extends React.Component {
                 labelCategory: 'Category',
                 createdDate: '11.05.2019',
                 variantDifficultyStatus: 'Dark',
+                favorite: false
             },
             searchPhrase: '',
             paginationChunk: 1,
             paginationChunks: [],
-            paginationXXX: '',
         };
     }
 
@@ -144,6 +158,15 @@ export default class LiveSearch extends React.Component {
         this.setState(({
             questions
         }))
+    };
+
+    handleClickStar = (questionObjectoo) => {
+       questionObjectoo = {
+            ...questionObjectoo,
+            favorite: !questionObjectoo.favorite
+        };
+
+        return questionObjectoo
     };
 
     deleteQuestion = (idQuestion) => {
@@ -193,6 +216,7 @@ export default class LiveSearch extends React.Component {
                 labelCategory: 'Category',
                 createdDate: '11.05.2019',
                 variantDifficultyStatus: 'Dark',
+                favorite: false,
             }
         });
 
@@ -217,16 +241,12 @@ export default class LiveSearch extends React.Component {
         let modalClose = () => this.setState({modalShow: false});
 
         let paginate = (questions) => {
-            let chunk = 5;
+            let chunk = 3;
             let paginationChunks = [];
 
             for (let i=0,j=questions.length; i<j; i+=chunk) {
                 paginationChunks.push(questions.slice(i,i+chunk))
             }
-
-            // console.log(paginationChunks[this.state.paginationChunk - 1]);
-            // console.log(paginationChunks);
-
 
             items = [];
             for (let number = 1; number <= paginationChunks.length; number++) {
@@ -237,7 +257,6 @@ export default class LiveSearch extends React.Component {
                         {number}
                     </Pagination.Item>,
                 );}
-
 
             console.log('chunk ' + (this.state.paginationChunk));
             console.log('items ' + (items.length));
@@ -287,6 +306,8 @@ export default class LiveSearch extends React.Component {
                             return <Question
                                 deleteQuestion={this.deleteQuestion}
                                 openEditQuestion={this.openEditQuestion}
+                                handleClickStar={this.handleClickStar}
+                                editQuestion={this.editQuestion}
                                 key={el.id}
                                 questionObject={this.state.questionObject}
                                 id={el.id}
@@ -299,6 +320,7 @@ export default class LiveSearch extends React.Component {
                                 labelCategory={el.labelCategory}
                                 labelDifficulty={el.labelDifficulty}
                                 createdDate={el.createdDate}
+                                favorite={el.favorite}
                             />
                         })
                     }
