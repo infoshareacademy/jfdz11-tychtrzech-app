@@ -21,7 +21,6 @@ class AddEditQuestionModal extends React.Component {
     }
 
     validateForm() {
-        console.log(this.props.questionObject.nameQuestion);
         return this.props.questionObject.nameQuestion.length > 0
             && this.props.questionObject.goodAnswer.length > 0
             && this.props.questionObject.badAnswerFirst.length > 0

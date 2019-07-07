@@ -54,18 +54,6 @@ let QUESTIONS = [
     },
     {
         id: randomHash(),
-        nameQuestion: 'Co to swiat',
-        goodAnswer: 'kino',
-        badAnswerFirst: 'kfc',
-        badAnswerSecond: 'szkola',
-        badAnswerThird: 'mcdonald',
-        image: setCategoryImage("Biology"),
-        labelCategory: 'Biology',
-        labelDifficulty: 'medium',
-        createdDate: '11.05.2019'
-    },
-    {
-        id: randomHash(),
         nameQuestion: 'Jak masz na imie',
         goodAnswer: 'kino',
         badAnswerFirst: 'kfc',
@@ -109,6 +97,18 @@ let QUESTIONS = [
         badAnswerThird: 'mcdonald',
         image: setCategoryImage("Math"),
         labelCategory: 'Math',
+        labelDifficulty: 'medium',
+        createdDate: '11.05.2019'
+    },
+    {
+        id: randomHash(),
+        nameQuestion: 'Co to swiat',
+        goodAnswer: 'kino',
+        badAnswerFirst: 'kfc',
+        badAnswerSecond: 'szkola',
+        badAnswerThird: 'mcdonald',
+        image: setCategoryImage("Biology"),
+        labelCategory: 'Biology',
         labelDifficulty: 'medium',
         createdDate: '11.05.2019'
     },

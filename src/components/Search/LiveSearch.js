@@ -106,7 +106,8 @@ export default class LiveSearch extends React.Component {
             },
             searchPhrase: '',
             paginationChunk: 1,
-            paginationChunks: null
+            paginationChunks: [],
+            paginationXXX: '',
         };
     }
 
@@ -212,20 +213,20 @@ export default class LiveSearch extends React.Component {
         })
     };
 
-
-render() {
+    render() {
         let modalClose = () => this.setState({modalShow: false});
 
-        let paginate = (questions = this.state.questions) => {
-            let chunk = 4;
+        let paginate = (questions) => {
+            let chunk = 5;
             let paginationChunks = [];
 
             for (let i=0,j=questions.length; i<j; i+=chunk) {
                 paginationChunks.push(questions.slice(i,i+chunk))
             }
 
-            console.log(paginationChunks[this.state.paginationChunk - 1]);
-            console.log(paginationChunks);
+            // console.log(paginationChunks[this.state.paginationChunk - 1]);
+            // console.log(paginationChunks);
+
 
             items = [];
             for (let number = 1; number <= paginationChunks.length; number++) {
@@ -236,7 +237,21 @@ render() {
                         {number}
                     </Pagination.Item>,
                 );}
-            return paginationChunks[this.state.paginationChunk - 1]
+
+
+            console.log('chunk ' + (this.state.paginationChunk));
+            console.log('items ' + (items.length));
+
+            if(this.state.paginationChunk - 1 === -1){
+                console.log('wpadlem');
+                return []
+            }
+            if(this.state.paginationChunk - 1 >= items.length && Object.keys(paginationChunks).length !== 0){
+                this.showPaginationChunk(items.length);
+                return (paginationChunks[items.length - 1])
+            } else {
+            return Object.keys(paginationChunks).length === 0 ? [] : paginationChunks[this.state.paginationChunk - 1]
+            }
     };
         return (
             <div className={styles.holder}>
