@@ -7,6 +7,7 @@ import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 import Pagination from "react-bootstrap/Pagination";
+let items = [];
 
 class Question extends React.Component {
     constructor(props) {
@@ -214,26 +215,29 @@ export default class LiveSearch extends React.Component {
 
 render() {
         let modalClose = () => this.setState({modalShow: false});
-        const {questions} = this.state;
-        let chunk = 4;
-        let paginationChunks = [];
 
-        for (let i=0,j=questions.length; i<j; i+=chunk) {
-            paginationChunks.push(questions.slice(i,i+chunk))
-        }
+        let paginate = (questions = this.state.questions) => {
+            let chunk = 4;
+            let paginationChunks = [];
 
-        console.log(paginationChunks[this.state.paginationChunk + 1]);
-        console.log(paginationChunks);
-        let items = [];
-        for (let number = 1; number <= paginationChunks.length; number++) {
-        items.push(
-            <Pagination.Item key={number} active={this.state.paginationChunk === number}
-                             onClick={()=> this.showPaginationChunk(number)}
-            >
-                {number}
-            </Pagination.Item>,
-        );
-    }
+            for (let i=0,j=questions.length; i<j; i+=chunk) {
+                paginationChunks.push(questions.slice(i,i+chunk))
+            }
+
+            console.log(paginationChunks[this.state.paginationChunk - 1]);
+            console.log(paginationChunks);
+
+            items = [];
+            for (let number = 1; number <= paginationChunks.length; number++) {
+                items.push(
+                    <Pagination.Item key={number} active={this.state.paginationChunk === number}
+                                     onClick={()=> this.showPaginationChunk(number)}
+                    >
+                        {number}
+                    </Pagination.Item>,
+                );}
+            return paginationChunks[this.state.paginationChunk - 1]
+    };
         return (
             <div className={styles.holder}>
                 <div className={styles.flexContainerSearchAdd} style={{textAlign: 'center', marginBottom: '20px',}}>
@@ -264,7 +268,7 @@ render() {
 
                 <ul className={styles.ulSearch}>
                     {
-                        this.filteredQuestions.map((el) => {
+                        paginate(this.filteredQuestions).map((el) => {
                             return <Question
                                 deleteQuestion={this.deleteQuestion}
                                 openEditQuestion={this.openEditQuestion}
