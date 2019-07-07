@@ -6,6 +6,7 @@ import questions, {setCategoryImage} from "../../questions";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
+import Pagination from "react-bootstrap/Pagination";
 
 class Question extends React.Component {
     constructor(props) {
@@ -103,6 +104,8 @@ export default class LiveSearch extends React.Component {
                 variantDifficultyStatus: 'Dark',
             },
             searchPhrase: '',
+            paginationChunk: 1,
+            paginationChunks: null
         };
     }
 
@@ -202,8 +205,46 @@ export default class LiveSearch extends React.Component {
             }
         });
 
-    render() {
+    get filteredQuestions() {
+        const {questions, searchPhrase} = this.state;
+        if (searchPhrase === '') {
+            return questions
+        }
+        return questions.filter((el) => {
+            let searchValue = el.nameQuestion.toLowerCase();
+            return searchValue.indexOf(searchPhrase) !== -1;
+        });
+    }
+
+    showPaginationChunk = (number) => {
+        this.setState({
+            paginationChunk: number
+        })
+    };
+
+
+render() {
         let modalClose = () => this.setState({modalShow: false});
+        const {questions} = this.state;
+        let chunk = 4;
+        let paginationChunks = [];
+
+        for (let i=0,j=questions.length; i<j; i+=chunk) {
+            paginationChunks.push(questions.slice(i,i+chunk))
+        }
+
+        console.log(paginationChunks[this.state.paginationChunk + 1]);
+        console.log(paginationChunks);
+        let items = [];
+        for (let number = 1; number <= paginationChunks.length; number++) {
+        items.push(
+            <Pagination.Item key={number} active={this.state.paginationChunk === number}
+                             onClick={()=> this.showPaginationChunk(number)}
+            >
+                {number}
+            </Pagination.Item>,
+        );
+    }
         return (
             <div className={styles.holder}>
                 <div className={styles.flexContainerSearchAdd} style={{textAlign: 'center', marginBottom: '20px',}}>
@@ -254,6 +295,7 @@ export default class LiveSearch extends React.Component {
                         })
                     }
                 </ul>
+                <Pagination style={{justifyContent: "center"}}>{items}</Pagination>
             </div>
         )
     }

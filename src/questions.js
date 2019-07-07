@@ -75,6 +75,126 @@ let QUESTIONS = [
         labelCategory: 'Chemistry',
         labelDifficulty: 'easy',
         createdDate: '11.05.2019'
+    },
+    {
+        id: randomHash(),
+        nameQuestion: 'Gdzie byles wczoraj',
+        goodAnswer: 'kino',
+        badAnswerFirst: 'kfc',
+        badAnswerSecond: 'szkola',
+        badAnswerThird: 'mcdonald',
+        labelCategory: 'Chemistry',
+        image: setCategoryImage('Chemistry'),
+        labelDifficulty: 'medium',
+        createdDate: '11.05.2019'
+    },
+    {
+        id: randomHash(),
+        nameQuestion: 'Co jadles wczoraj',
+        goodAnswer: 'kino',
+        badAnswerFirst: 'kfc',
+        badAnswerSecond: 'szkola',
+        badAnswerThird: 'mcdonald',
+        image: setCategoryImage("Physics"),
+        labelCategory: 'Physics',
+        labelDifficulty: 'hard',
+        createdDate: '11.05.2019'
+    },
+    {
+        id: randomHash(),
+        nameQuestion: 'Z kim tanczyles',
+        goodAnswer: 'kino',
+        badAnswerFirst: 'kfc',
+        badAnswerSecond: 'szkola',
+        badAnswerThird: 'mcdonald',
+        image: setCategoryImage("Math"),
+        labelCategory: 'Math',
+        labelDifficulty: 'medium',
+        createdDate: '11.05.2019'
+    },
+    {
+        id: randomHash(),
+        nameQuestion: 'Co to swiat',
+        goodAnswer: 'kino',
+        badAnswerFirst: 'kfc',
+        badAnswerSecond: 'szkola',
+        badAnswerThird: 'mcdonald',
+        image: setCategoryImage("Biology"),
+        labelCategory: 'Biology',
+        labelDifficulty: 'medium',
+        createdDate: '11.05.2019'
+    },
+    {
+        id: randomHash(),
+        nameQuestion: 'Jak masz na imie',
+        goodAnswer: 'kino',
+        badAnswerFirst: 'kfc',
+        badAnswerSecond: 'szkola',
+        badAnswerThird: 'mcdonald',
+        image: setCategoryImage("Chemistry"),
+        labelCategory: 'Chemistry',
+        labelDifficulty: 'easy',
+        createdDate: '11.05.2019'
+    },
+    {
+        id: randomHash(),
+        nameQuestion: 'Gdzie byles wczoraj',
+        goodAnswer: 'kino',
+        badAnswerFirst: 'kfc',
+        badAnswerSecond: 'szkola',
+        badAnswerThird: 'mcdonald',
+        labelCategory: 'Chemistry',
+        image: setCategoryImage('Chemistry'),
+        labelDifficulty: 'medium',
+        createdDate: '11.05.2019'
+    },
+    {
+        id: randomHash(),
+        nameQuestion: 'Co jadles wczoraj',
+        goodAnswer: 'kino',
+        badAnswerFirst: 'kfc',
+        badAnswerSecond: 'szkola',
+        badAnswerThird: 'mcdonald',
+        image: setCategoryImage("Physics"),
+        labelCategory: 'Physics',
+        labelDifficulty: 'hard',
+        createdDate: '11.05.2019'
+    },
+    {
+        id: randomHash(),
+        nameQuestion: 'Z kim tanczyles',
+        goodAnswer: 'kino',
+        badAnswerFirst: 'kfc',
+        badAnswerSecond: 'szkola',
+        badAnswerThird: 'mcdonald',
+        image: setCategoryImage("Math"),
+        labelCategory: 'Math',
+        labelDifficulty: 'medium',
+        createdDate: '11.05.2019'
+    },
+    {
+        id: randomHash(),
+        nameQuestion: 'Co to swiat',
+        goodAnswer: 'kino',
+        badAnswerFirst: 'kfc',
+        badAnswerSecond: 'szkola',
+        badAnswerThird: 'mcdonald',
+        image: setCategoryImage("Biology"),
+        labelCategory: 'Biology',
+        labelDifficulty: 'medium',
+        createdDate: '11.05.2019'
+    },
+    {
+        id: randomHash(),
+        nameQuestion: 'Jak masz na imie',
+        goodAnswer: 'kino',
+        badAnswerFirst: 'kfc',
+        badAnswerSecond: 'szkola',
+        badAnswerThird: 'mcdonald',
+        image: setCategoryImage("Chemistry"),
+        labelCategory: 'Chemistry',
+        labelDifficulty: 'easy',
+        createdDate: '11.05.2019'
     }
 ];
 
