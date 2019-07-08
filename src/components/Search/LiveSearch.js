@@ -8,6 +8,11 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 import Pagination from "react-bootstrap/Pagination";
 import Star from '@material-ui/icons/StarRate';
+import Accordion from "react-bootstrap/Accordion";
+import Card from "@material-ui/core/Card";
+import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
+import ToggleButton from "react-bootstrap/ToggleButton";
+
 let items = [];
 
 
@@ -21,11 +26,12 @@ class Question extends React.Component {
     }
 
     favoriteStar = () => {
-        return this.props.favorite ? <span> <Star htmlColor="#FFE21F"/> </span> : <span> <Star htmlColor="grey" /> </span>
+        return this.props.favorite ? <span> <Star htmlColor="#FFE21F"/> </span> :
+            <span> <Star htmlColor="grey"/> </span>
     };
 
     textFavoriteOnDropdown = () => {
-      return this.props.favorite ? 'unfavourite' : 'add favorite'
+        return this.props.favorite ? 'unfavourite' : 'add favorite'
     };
 
     render() {
@@ -69,12 +75,14 @@ class Question extends React.Component {
                     <Col style={{flexGrow: '10'}}><img src={this.props.image} className={styles.imgMini} alt="img"/>
                         <span style={{display: 'inline', width: '200px'}}>{this.props.nameQuestion}</span>
                         <p></p>
-                        <p> {this.props.goodAnswer}  {this.props.badAnswerFirst}</p>
+                        <p> {this.props.goodAnswer} {this.props.badAnswerFirst}</p>
                         <p>{this.props.badAnswerSecond} {this.props.badAnswerThird}</p>
                     </Col>
-                    <Col style={{padding: '5px', width: '5%', flexGrow: '8'}}><Button style={{marginLeft: '40px'}} variant={variant} size={"sm"}>
+                    <Col style={{padding: '5px', width: '5%', flexGrow: '8'}}><Button style={{marginLeft: '40px'}}
+                                                                                      variant={variant} size={"sm"}>
                         {this.props.labelDifficulty}</Button></Col>
-                    <Col style={{flexGrow: '9'}}><p style={{display: 'inline', color: 'grey'}}> Created on: {this.props.createdDate}</p></Col>
+                    <Col style={{flexGrow: '9'}}><p style={{display: 'inline', color: 'grey'}}> Created
+                        on: {this.props.createdDate}</p></Col>
                     <Col style={{padding: '5px', textAlign: 'right', flexGrow: '1'}}>
                         <ButtonToolbar style={{paddingRight: '10px', justifyContent: 'flex-end', marginRight: '5px'}}
                                        size={'sm'}>
@@ -123,13 +131,41 @@ export default class LiveSearch extends React.Component {
                 variantDifficultyStatus: 'Dark',
                 favorite: false
             },
+            filters: {
+                favorites: false
+            },
             searchPhrase: '',
             paginationChunk: 1,
             paginationChunks: [],
         };
     }
 
+    get filteredQuestions() {
+        const {questions, searchPhrase} = this.state;
 
+        if (this.state.filters.favorites === true){
+            return questions.filter((obj) => obj.favorite === true).filter((el) => {
+                let searchValue = el.nameQuestion.toLowerCase();
+                return searchValue.indexOf(searchPhrase) !== -1;
+            });}
+
+        if (searchPhrase === '') {
+            return questions
+        }
+        return questions.filter((el) => {
+            let searchValue = el.nameQuestion.toLowerCase();
+            return searchValue.indexOf(searchPhrase) !== -1;
+        });
+    }
+
+    handleClickFilter = (filter) => {
+        this.setState({
+            filters: {
+                ...this.state.filters,
+                [filter]: !this.state.filters[filter]
+            }
+        })
+    };
     searchHandler = (event) => {
         this.setState({
             searchPhrase: event.target.value.toLowerCase()
@@ -165,7 +201,7 @@ export default class LiveSearch extends React.Component {
     };
 
     handleClickStar = (questionObjectoo) => {
-       questionObjectoo = {
+        questionObjectoo = {
             ...questionObjectoo,
             favorite: !questionObjectoo.favorite
         };
@@ -224,17 +260,6 @@ export default class LiveSearch extends React.Component {
             }
         });
 
-    get filteredQuestions() {
-        const {questions, searchPhrase} = this.state;
-        if (searchPhrase === '') {
-            return questions
-        }
-        return questions.filter((el) => {
-            let searchValue = el.nameQuestion.toLowerCase();
-            return searchValue.indexOf(searchPhrase) !== -1;
-        });
-    }
-
     showPaginationChunk = (number) => {
         this.setState({
             paginationChunk: number
@@ -248,33 +273,88 @@ export default class LiveSearch extends React.Component {
             let chunk = 3;
             let paginationChunks = [];
 
-            for (let i=0,j=questions.length; i<j; i+=chunk) {
-                paginationChunks.push(questions.slice(i,i+chunk))
+            for (let i = 0, j = questions.length; i < j; i += chunk) {
+                paginationChunks.push(questions.slice(i, i + chunk))
             }
 
             items = [];
             for (let number = 1; number <= paginationChunks.length; number++) {
                 items.push(
                     <Pagination.Item key={number} active={this.state.paginationChunk === number}
-                                     onClick={()=> this.showPaginationChunk(number)}
+                                     onClick={() => this.showPaginationChunk(number)}
                     >
                         {number}
                     </Pagination.Item>,
-                );}
+                );
+            }
 
-            if(this.state.paginationChunk - 1 === -1){
-                console.log('wpadlem');
+            if (this.state.paginationChunk - 1 === -1) {
                 return []
             }
-            if(this.state.paginationChunk - 1 >= items.length && Object.keys(paginationChunks).length !== 0){
+            if (this.state.paginationChunk - 1 >= items.length && Object.keys(paginationChunks).length !== 0) {
                 this.showPaginationChunk(items.length);
                 return (paginationChunks[items.length - 1])
             } else {
-            return Object.keys(paginationChunks).length === 0 ? [] : paginationChunks[this.state.paginationChunk - 1]
+                return Object.keys(paginationChunks).length === 0 ? [] : paginationChunks[this.state.paginationChunk - 1]
             }
-    };
+        };
         return (
             <div className={styles.holder}>
+                <Accordion>
+                    <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                        Filters!
+                    </Accordion.Toggle>
+                    <Accordion.Collapse eventKey="0">
+                        <ButtonToolbar style={{margin: '10px', padding: '0px'}}>
+                            <ToggleButtonGroup name='filters' type="checkbox" defaultValue={[1, 8]}>
+                                <ToggleButton value={1}
+                                              variant={'outline-warning'}
+                                              style={{padding: '0px', margin: '10px'}}
+                                              onChange={() => this.handleClickFilter('favorites')}
+                                >
+                                    Favorites</ToggleButton>
+                                <ToggleButton value={2}
+                                              variant={'test'}
+                                              style={{padding: '0px', margin: '10px'}}
+                                >
+                                    Math</ToggleButton>
+                                <ToggleButton value={3}
+                                              variant={'test'}
+                                              style={{padding: '0px', margin: '10px'}}
+                                >
+                                    Biology</ToggleButton>
+                                <ToggleButton value={4}
+                                              variant={'test'}
+                                              style={{padding: '0px', margin: '10px'}}
+                                >
+                                    Chemistry</ToggleButton>
+                                <ToggleButton value={5}
+                                              variant={'test'}
+                                              style={{padding: '0px', margin: '10px'}}
+                                >
+                                    Physics</ToggleButton>
+                                <ToggleButton
+                                    value={6}
+                                    variant={'sdanger'}
+                                    style={{padding: '0px', margin: '10px'}}
+                                >
+                                    hard</ToggleButton>
+                                <ToggleButton
+                                    value={7}
+                                    variant={'swarning'}
+                                    style={{padding: '0px', margin: '10px'}}
+                                >
+                                    medium</ToggleButton>
+                                <ToggleButton
+                                    value={8}
+                                    variant={'ssuccess'}
+                                    style={{padding: '0px', margin: '10px'}}
+                                >
+                                    easy</ToggleButton>
+                            </ToggleButtonGroup>
+                        </ButtonToolbar>
+                    </Accordion.Collapse>
+                </Accordion>
                 <div className={styles.flexContainerSearchAdd} style={{textAlign: 'center', marginBottom: '20px',}}>
 
                     <input placeholder={'Search'} autoFocus={true} type="text"
