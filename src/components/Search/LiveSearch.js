@@ -7,7 +7,9 @@ import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 import Pagination from "react-bootstrap/Pagination";
+import Star from '@material-ui/icons/StarRate';
 let items = [];
+
 
 class Question extends React.Component {
     constructor(props) {
@@ -19,7 +21,7 @@ class Question extends React.Component {
     }
 
     favoriteStar = () => {
-        return this.props.favorite ? <span> hi </span> : <span> bye </span>
+        return this.props.favorite ? <span> <Star htmlColor="#FFE21F"/> </span> : <span> <Star htmlColor="grey" /> </span>
     };
 
     textFavoriteOnDropdown = () => {
@@ -60,7 +62,9 @@ class Question extends React.Component {
                     <Col style={{flexGrow: '1'}}>
                         <span onClick={() => {
                             this.props.editQuestion(this.props.handleClickStar(questionObjecto))
-                        }}>{this.favoriteStar()}</span>
+                        }}>{this.favoriteStar()}
+                        </span>
+
                     </Col>
                     <Col style={{flexGrow: '10'}}><img src={this.props.image} className={styles.imgMini} alt="img"/>
                         <span style={{display: 'inline', width: '200px'}}>{this.props.nameQuestion}</span>
@@ -257,9 +261,6 @@ export default class LiveSearch extends React.Component {
                         {number}
                     </Pagination.Item>,
                 );}
-
-            console.log('chunk ' + (this.state.paginationChunk));
-            console.log('items ' + (items.length));
 
             if(this.state.paginationChunk - 1 === -1){
                 console.log('wpadlem');
