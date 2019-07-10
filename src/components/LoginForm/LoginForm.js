@@ -79,8 +79,6 @@ import React from "react";
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import styles from './LoginForm.module.css'
-import {headerNavUlLiA} from "../Navbar/Navbar.module.css";
-import {NavLink} from "react-router-dom";
 import Redirect from "react-router-dom/es/Redirect";
 
 

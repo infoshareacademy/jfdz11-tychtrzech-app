@@ -73,7 +73,7 @@ class Question extends React.Component {
                     </Col>
                     <Col style={{flexGrow: '10'}}><img src={this.props.image} className={styles.imgMini} alt="img"/>
                         <span style={{display: 'inline', width: '200px'}}>{this.props.nameQuestion}</span>
-                        <p></p>
+                        <p>{' '}</p>
                         <p> {this.props.goodAnswer} {this.props.badAnswerFirst}</p>
                         <p>{this.props.badAnswerSecond} {this.props.badAnswerThird}</p>
                     </Col>
@@ -303,7 +303,7 @@ export default class LiveSearch extends React.Component {
         let modalClose = () => this.setState({modalShow: false});
 
         let paginate = (questions) => {
-            let chunk = 8;
+            let chunk = 5;
             let paginationChunks = [];
 
             for (let i = 0, j = questions.length; i < j; i += chunk) {
