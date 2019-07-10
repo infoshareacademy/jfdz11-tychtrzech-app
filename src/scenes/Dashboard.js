@@ -1,5 +1,7 @@
 import React from 'react'
-
+import ChartBar from "../components/ChartBar"
+import ChartPie from "../components/ChartPie"
+import NameDash from '../components/NameDash/NameDash';
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -11,9 +13,14 @@ class Dashboard extends React.Component {
 
     render() {
         return (
+
             <div>
+                <br></br>
+                <NameDash/>
                 <br/>
-               Dashboard
+                <ChartPie />
+                <ChartBar legendPosiotion='bottom'/>
+
             </div>
         )
     }
