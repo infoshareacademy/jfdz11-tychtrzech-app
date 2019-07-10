@@ -56,7 +56,7 @@ class Question extends React.Component {
                 image: this.props.image,
                 labelCategory: this.props.labelCategory,
                 labelDifficulty: this.props.labelDifficulty,
-                createdDate: this.props.createdDate,
+                createdDate: new Date().toLocaleString(),
                 variantDifficultyStatus: variant,
                 favorite: this.props.favorite
             };
@@ -80,8 +80,7 @@ class Question extends React.Component {
                     <Col style={{padding: '5px', width: '5%', flexGrow: '8'}}><Button style={{marginLeft: '40px'}}
                                                                                       variant={variant} size={"sm"}>
                         {this.props.labelDifficulty}</Button></Col>
-                    <Col style={{flexGrow: '9'}}><p style={{display: 'inline', color: 'grey'}}> Created
-                        on: {this.props.createdDate}</p></Col>
+                    <Col style={{flexGrow: '9', flexShrink: '1'}}><p style={{display: 'inline', color: 'grey'}}>Updated: {this.props.createdDate}</p></Col>
                     <Col style={{padding: '5px', textAlign: 'right', flexGrow: '1'}}>
                         <ButtonToolbar style={{paddingRight: '10px', justifyContent: 'flex-end', marginRight: '5px'}}
                                        size={'sm'}>
@@ -144,7 +143,7 @@ export default class LiveSearch extends React.Component {
                 badAnswerThird: '',
                 labelDifficulty: 'Difficulty',
                 labelCategory: 'Category',
-                createdDate: '11.05.2019',
+                createdDate: new Date().toLocaleString(),
                 variantDifficultyStatus: 'Dark',
                 favorite: 'unfavorite'
             },
@@ -215,7 +214,10 @@ export default class LiveSearch extends React.Component {
 
     openEditQuestion = (questionObject) => {
         this.setState({
-            questionObject: questionObject,
+            questionObject: {
+              ...questionObject,
+              createDate: new Date().toLocaleString()
+            },
             mode: "Update",
             modalShow: true
         })
@@ -287,7 +289,7 @@ export default class LiveSearch extends React.Component {
                 badAnswerThird: '',
                 labelDifficulty: 'Difficulty',
                 labelCategory: 'Category',
-                createdDate: '11.05.2019',
+                createdDate: new Date().toLocaleString(),
                 variantDifficultyStatus: 'Dark',
                 favorite: 'unfavorite'
             }

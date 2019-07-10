@@ -65,7 +65,9 @@ class AddEditQuestionModal extends React.Component {
         } = this.props;
 
         return (
-            <Modal {...rest} size={"lg"} aria-labelledby="contained-modal-title-vcenter">
+            <Modal {...rest} size={"lg"} aria-labelledby="contained-modal-title-vcenter"
+            onExit={() => resetData()}
+            >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter" as={'h1'}>
                         {this.props.mode} question

@@ -26,7 +26,7 @@ let QUESTIONS = [
         badAnswerThird: 'mcdonald',
         labelCategory: 'Chemistry',
         image: setCategoryImage('Chemistry'),
-        labelDifficulty: 'hard',
+        labelDifficulty: 'easy',
         createdDate: '11.05.2019',
         favorite: 'unfavorite'
     },
@@ -39,7 +39,7 @@ let QUESTIONS = [
         badAnswerThird: 'mcdonald',
         image: setCategoryImage("Physics"),
         labelCategory: 'Physics',
-        labelDifficulty: 'hard',
+        labelDifficulty: 'medium',
         createdDate: '11.05.2019',
         favorite: 'unfavorite'
     },
@@ -52,7 +52,7 @@ let QUESTIONS = [
         badAnswerThird: 'mcdonald',
         image: setCategoryImage("Math"),
         labelCategory: 'Math',
-        labelDifficulty: 'hard',
+        labelDifficulty: 'medium',
         createdDate: '11.05.2019',
         favorite: 'unfavorite'
     },
