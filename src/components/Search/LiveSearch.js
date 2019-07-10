@@ -9,9 +9,6 @@ import Dropdown from "react-bootstrap/Dropdown";
 import Pagination from "react-bootstrap/Pagination";
 import Star from '@material-ui/icons/StarRate';
 import Accordion from "react-bootstrap/Accordion";
-import Card from "@material-ui/core/Card";
-import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
-import ToggleButton from "react-bootstrap/ToggleButton";
 
 let items = [];
 
@@ -26,12 +23,12 @@ class Question extends React.Component {
     }
 
     favoriteStar = () => {
-        return this.props.favorite ? <span> <Star htmlColor="#FFE21F"/> </span> :
+        return this.props.favorite === 'favorite' ? <span> <Star htmlColor="#FFE21F"/> </span> :
             <span> <Star htmlColor="grey"/> </span>
     };
 
     textFavoriteOnDropdown = () => {
-        return this.props.favorite ? 'unfavourite' : 'add favorite'
+        return this.props.favorite === 'favorite' ? 'unfavorite' : 'add favorite'
     };
 
     render() {
@@ -44,7 +41,9 @@ class Question extends React.Component {
                 variant = 'warning';
                 break;
             case "hard":
-                variant = 'danger'
+                variant = 'danger';
+                break;
+            default:
         }
         const questionObjecto =
             {
@@ -110,6 +109,24 @@ class Question extends React.Component {
     }
 }
 
+function FiltersButtons (props) {
+    return ([
+        'favorite',
+        'Math',
+        'Biology',
+        'Chemistry',
+        'Physics',
+        'easy',
+        'medium',
+        'hard',
+    ].map((e, index) => {
+        return <Button       value={index}
+                             variant={props.filters[e] ? 'secondary' : 'test'}
+                             onClick={() => props.handleClickFilter(e)}
+                             key={e}
+        > {e} </Button>
+    }))}
+
 export default class LiveSearch extends React.Component {
     constructor(props) {
         super(props);
@@ -129,10 +146,17 @@ export default class LiveSearch extends React.Component {
                 labelCategory: 'Category',
                 createdDate: '11.05.2019',
                 variantDifficultyStatus: 'Dark',
-                favorite: false
+                favorite: 'unfavorite'
             },
             filters: {
-                favorites: false
+                favorite: false,
+                easy: false,
+                medium: false,
+                hard: false,
+                Biology: false,
+                Chemistry: false,
+                Physics: false,
+                Math: false,
             },
             searchPhrase: '',
             paginationChunk: 1,
@@ -140,19 +164,28 @@ export default class LiveSearch extends React.Component {
         };
     }
 
+    getKeyByValue = (obj, value) =>
+        Object.keys(obj).filter(key => obj[key] === value);
+
     get filteredQuestions() {
         const {questions, searchPhrase} = this.state;
 
-        if (this.state.filters.favorites === true){
-            return questions.filter((obj) => obj.favorite === true).filter((el) => {
-                let searchValue = el.nameQuestion.toLowerCase();
-                return searchValue.indexOf(searchPhrase) !== -1;
-            });}
+        const activeFiltersArray = (this.getKeyByValue(this.state.filters, true));
+
+        const filterByActiveFilters = () => {
+            if (activeFiltersArray.length !== 0) {
+                return questions.filter((question) =>
+                    activeFiltersArray.every(activeFilter => Object.values(question).includes(activeFilter))
+                )
+            }else {
+                return questions
+            }
+        };
 
         if (searchPhrase === '') {
-            return questions
+            filterByActiveFilters();
         }
-        return questions.filter((el) => {
+        return filterByActiveFilters().filter((el) => {
             let searchValue = el.nameQuestion.toLowerCase();
             return searchValue.indexOf(searchPhrase) !== -1;
         });
@@ -203,7 +236,7 @@ export default class LiveSearch extends React.Component {
     handleClickStar = (questionObjectoo) => {
         questionObjectoo = {
             ...questionObjectoo,
-            favorite: !questionObjectoo.favorite
+            favorite: questionObjectoo.favorite === 'favorite' ? 'unfavorite' : 'favorite'
         };
 
         return questionObjectoo
@@ -256,7 +289,7 @@ export default class LiveSearch extends React.Component {
                 labelCategory: 'Category',
                 createdDate: '11.05.2019',
                 variantDifficultyStatus: 'Dark',
-                favorite: false,
+                favorite: 'unfavorite'
             }
         });
 
@@ -270,7 +303,7 @@ export default class LiveSearch extends React.Component {
         let modalClose = () => this.setState({modalShow: false});
 
         let paginate = (questions) => {
-            let chunk = 3;
+            let chunk = 8;
             let paginationChunks = [];
 
             for (let i = 0, j = questions.length; i < j; i += chunk) {
@@ -298,6 +331,7 @@ export default class LiveSearch extends React.Component {
                 return Object.keys(paginationChunks).length === 0 ? [] : paginationChunks[this.state.paginationChunk - 1]
             }
         };
+
         return (
             <div className={styles.holder}>
                 <Accordion>
@@ -305,53 +339,9 @@ export default class LiveSearch extends React.Component {
                         Filters!
                     </Accordion.Toggle>
                     <Accordion.Collapse eventKey="0">
-                        <ButtonToolbar style={{margin: '10px', padding: '0px'}}>
-                            <ToggleButtonGroup name='filters' type="checkbox" defaultValue={[1, 8]}>
-                                <ToggleButton value={1}
-                                              variant={'outline-warning'}
-                                              style={{padding: '0px', margin: '10px'}}
-                                              onChange={() => this.handleClickFilter('favorites')}
-                                >
-                                    Favorites</ToggleButton>
-                                <ToggleButton value={2}
-                                              variant={'test'}
-                                              style={{padding: '0px', margin: '10px'}}
-                                >
-                                    Math</ToggleButton>
-                                <ToggleButton value={3}
-                                              variant={'test'}
-                                              style={{padding: '0px', margin: '10px'}}
-                                >
-                                    Biology</ToggleButton>
-                                <ToggleButton value={4}
-                                              variant={'test'}
-                                              style={{padding: '0px', margin: '10px'}}
-                                >
-                                    Chemistry</ToggleButton>
-                                <ToggleButton value={5}
-                                              variant={'test'}
-                                              style={{padding: '0px', margin: '10px'}}
-                                >
-                                    Physics</ToggleButton>
-                                <ToggleButton
-                                    value={6}
-                                    variant={'sdanger'}
-                                    style={{padding: '0px', margin: '10px'}}
-                                >
-                                    hard</ToggleButton>
-                                <ToggleButton
-                                    value={7}
-                                    variant={'swarning'}
-                                    style={{padding: '0px', margin: '10px'}}
-                                >
-                                    medium</ToggleButton>
-                                <ToggleButton
-                                    value={8}
-                                    variant={'ssuccess'}
-                                    style={{padding: '0px', margin: '10px'}}
-                                >
-                                    easy</ToggleButton>
-                            </ToggleButtonGroup>
+                        <ButtonToolbar style={{margin: '10px', padding: '0px', justifyContent: 'space-around'}}>
+                                <FiltersButtons handleClickFilter={this.handleClickFilter}
+                                                filters={this.state.filters}/>
                         </ButtonToolbar>
                     </Accordion.Collapse>
                 </Accordion>

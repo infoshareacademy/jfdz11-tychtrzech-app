@@ -69,7 +69,7 @@ class App extends React.Component {
                         <PrivateRoute component={Search}
                                       path="/questions"
                                       authenticated={this.state.login}/>
-                        <Redirect from='/' to='/login' />
+                        <Redirect from='/' to='/Dashboard' />
                     </Switch>
                 </div>
             </Router>

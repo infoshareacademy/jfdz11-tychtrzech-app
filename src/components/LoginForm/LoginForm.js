@@ -79,6 +79,9 @@ import React from "react";
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import styles from './LoginForm.module.css'
+import {headerNavUlLiA} from "../Navbar/Navbar.module.css";
+import {NavLink} from "react-router-dom";
+import Redirect from "react-router-dom/es/Redirect";
 
 
 class LoginForm extends React.Component {
@@ -108,9 +111,8 @@ class LoginForm extends React.Component {
 
     render() {
         if(this.props.login === true){
-            return null
+            return ( <Redirect to="/dashboard" />)
         }
-
         return (
             <div className={styles.Login}>
                 <Form onSubmit={this.handleSubmit} className={styles.Loginform}>
@@ -143,6 +145,7 @@ class LoginForm extends React.Component {
                     <Button style={{display: 'inline'}} variant="link"
                             size={"sm"} href={'/signup'}> Sign in!</Button>
                 </Form>
+            }
             </div>
         );
     }

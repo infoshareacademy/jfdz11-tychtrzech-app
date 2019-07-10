@@ -29,17 +29,8 @@ function Navbar(props) {
         <NavLink className={headerNavUlLiA} exact to='/dashboard'>
           Dashboard
         </NavLink>
-        <NavLink className={headerNavUlLiA} exact to='/tests'>
-          Tests
-        </NavLink>
         <NavLink className={headerNavUlLiA} exact to="/questions">
-          Questions
-        </NavLink>
-        <NavLink className={headerNavUlLiA} exact to="/favourites">
-          Favourites
-        </NavLink>
-        <NavLink className={headerNavUlLiA} exact to="/best-score">
-          Best Score
+          Database
         </NavLink>
         <NavLink className={headerNavUlLiA} exact to="/dashboard" onClick={logout}>
           Logout
