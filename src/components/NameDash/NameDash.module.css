@@ -1,12 +1,12 @@
-h1{
+.dupa1{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 70px;
     display: flex;
-    justify-items: center; 
+    justify-items: center;
     flex: auto;
     width: 600px;
 }
-h2{
+.dupa2{
     text-align: center;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
