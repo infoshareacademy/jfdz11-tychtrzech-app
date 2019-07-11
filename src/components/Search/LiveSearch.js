@@ -71,17 +71,17 @@ class Question extends React.Component {
                         </span>
 
                     </Col>
-                    <Col style={{flexGrow: '10'}}><img src={this.props.image} className={styles.imgMini} alt="img"/>
+                    <Col style={{flexGrow: '10', minWidth: '150px'}}><img src={this.props.image} className={styles.imgMini} alt="img"/>
                         <span style={{display: 'inline', width: '200px'}}>{this.props.nameQuestion}</span>
                         <p>{' '}</p>
                         <p> {this.props.goodAnswer} {this.props.badAnswerFirst}</p>
                         <p>{this.props.badAnswerSecond} {this.props.badAnswerThird}</p>
                     </Col>
-                    <Col style={{padding: '5px', width: '5%', flexGrow: '8'}}><Button style={{marginLeft: '40px'}}
+                    <Col style={{padding: '5px', width: '5%', flexGrow: '8', minWidth: '150px'}}><Button style={{marginLeft: '40px'}}
                                                                                       variant={variant} size={"sm"}>
                         {this.props.labelDifficulty}</Button></Col>
-                    <Col style={{flexGrow: '9', flexShrink: '1'}}><p style={{display: 'inline', color: 'grey'}}>Updated: {this.props.createdDate}</p></Col>
-                    <Col style={{padding: '5px', textAlign: 'right', flexGrow: '1'}}>
+                    <Col style={{flexGrow: '9', flexShrink: '1', minWidth: '150px'}}><p style={{display: 'inline', color: 'grey'}}>Updated: {this.props.createdDate}</p></Col>
+                    <Col style={{padding: '5px', textAlign: 'right', flexGrow: '1', minWidth: '150px'}}>
                         <ButtonToolbar style={{paddingRight: '10px', justifyContent: 'flex-end', marginRight: '5px'}}
                                        size={'sm'}>
                             <DropdownButton
