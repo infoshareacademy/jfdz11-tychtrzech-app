@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import {Pie} from 'react-chartjs-2'
-import { tsThisType } from '@babel/types';
 
 class ChartPie extends Component{
     constructor(propsPie){
         super(propsPie);
         this.state = {
             chartDataLine:{
-                labels:['Matematyka', 'Biologia', 'Informatyka', 'Chemia', 'Historia'],
+                labels:['Math', 'Biology', 'Physics', 'Chemistry', 'History'],
                 datasets:[
                     {
-                        label:'Ilość rozwiązanych testów przez użytkownika',
+                        label:'Question Solved',
                         data:[
                             26,
                             58,
@@ -33,7 +32,7 @@ class ChartPie extends Component{
         }
     }
 
-    
+
 
     static defaultProps ={
         displayTitle: true,
@@ -47,29 +46,28 @@ class ChartPie extends Component{
 <div className ="chartPie">
     <Pie
         data={this.state.chartDataLine}
-        width={800}
-        height={800}
+        width={400}
+        height={400}
         labels = {50}
 
 
         options={{
                 maintainAspectRatio: false,
-            
 
             title:{
                 display: this.props.displayTitle,
-                text: 'Pytania rozwiązane przez użytkownika:',
+                text: 'Questions Solved:',
                 fontSize: 25,
-                
+
             },
             legend:{
                 display: this.props.displayLegend,
                 position: this.props.legendPosition,
-                
+
             },
 
         }}
-    />            
+    />
 </div>
 
         )

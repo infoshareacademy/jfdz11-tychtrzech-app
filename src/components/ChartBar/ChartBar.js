@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import {Bar} from 'react-chartjs-2'
-import { tsThisType } from '@babel/types';
 
 class ChartBar extends Component{
     constructor(propsBar){
         super(propsBar);
         this.state = {
             chartDataLine:{
-                labels:['Matematyka', 'Biologia', 'Informatyka', 'Chemia', 'Historia'],
+                labels:['Math', 'Biology', 'Physics', 'Chemistry', 'History'],
                 datasets:[
                     {
-                        label:'ILOSC TESTOW',
+                        label:'Tests Count',
                         data:[
                             26,
                             58,
@@ -33,29 +32,26 @@ class ChartBar extends Component{
         }
     }
 
-    
-
     static defaultProps ={
         displayTitle: true,
         displayLegend: true,
         legendPosition: 'right'
-    }
-
+    };
 
     render(){
         return(
 <div className ="chartBar">
     <Bar
- 
+
         data={this.state.chartDataLine}
-        width={800}
-        height={800}
+        width={400}
+        height={400}
         options={{
             maintainAspectRatio: false,
-                
+
             title:{
                 display: this.props.displayTitle,
-                text: 'ilosc pytan w testach',
+                text: 'Question By Categories',
                 fontSize: 25
             },
             // legend:{
@@ -63,15 +59,10 @@ class ChartBar extends Component{
             //     position: this.props.legendPosition
             // }
         }}
-    />            
+    />
 </div>
-
         )
-
-
-
     }
-
 }
 
 
