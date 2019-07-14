@@ -320,7 +320,9 @@ export default class LiveSearch extends React.Component {
             for (let number = 1; number <= paginationChunks.length; number++) {
                 items.push(
                     <Pagination.Item key={number} active={this.state.paginationChunk === number}
-                                     onClick={() => this.showPaginationChunk(number)}
+                                     onClick={() => {this.showPaginationChunk(number)
+                                         window.scrollTo(0,0)}
+                                     }
                     >
                         {number}
                     </Pagination.Item>,
