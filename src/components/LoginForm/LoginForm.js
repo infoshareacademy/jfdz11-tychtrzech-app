@@ -112,7 +112,7 @@ class LoginForm extends React.Component {
             return ( <Redirect to="/dashboard" />)
         }
         return (
-            <div className={styles.Login}>
+            <div className={styles.Login} style={{marginTop: '50px'}}>
                 <Form onSubmit={this.handleSubmit} className={styles.Loginform}>
                     <Form.Group controlId="email">
                         <Form.Control
@@ -143,7 +143,6 @@ class LoginForm extends React.Component {
                     <Button style={{display: 'inline'}} variant="link"
                             size={"sm"} href={'/signup'}> Sign in!</Button>
                 </Form>
-            }
             </div>
         );
     }

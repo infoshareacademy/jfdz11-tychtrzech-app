@@ -33,7 +33,7 @@ class Signup extends React.Component {
         }
 
         return (
-            <div style={{marginTop: '50px'}}>
+            <div style={{marginTop: '50px', padding: '20px'}}>
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Group controlId="name">
                         <Form.Control
