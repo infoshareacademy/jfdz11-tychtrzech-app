@@ -15,7 +15,6 @@ function Navbar(props) {
           <Logo />
           <nav className={headerNav}>
             <NavLink className={headerNavUlLiA} exact to='/dashboard'>
-              .
             </NavLink>
           </nav>
         </header>

@@ -74,8 +74,6 @@ class Question extends React.Component {
                     <Col style={{flexGrow: '10', minWidth: '150px'}}><img src={this.props.image} className={styles.imgMini} alt="img"/>
                         <span style={{display: 'inline', width: '200px'}}>{this.props.nameQuestion}</span>
                         <p>{' '}</p>
-                        <p> {this.props.goodAnswer} {this.props.badAnswerFirst}</p>
-                        <p>{this.props.badAnswerSecond} {this.props.badAnswerThird}</p>
                     </Col>
                     <Col style={{padding: '5px', width: '5%', flexGrow: '8', minWidth: '150px'}}><Button style={{marginLeft: '40px'}}
                                                                                       variant={variant} size={"sm"}>
@@ -89,7 +87,7 @@ class Question extends React.Component {
                                 title={''}
                                 variant={'none'}
                                 id={'dropdown-variants-difficulty'}
-                                key={'options'}>
+                                key={'options'} style={{padding: '10px'}}>
                                 <Dropdown.Item eventKey="edit"
                                                onClick={() => this.props.openEditQuestion(questionObjecto)}>edit</Dropdown.Item>
                                 <Dropdown.Item eventKey="delete"
@@ -103,6 +101,12 @@ class Question extends React.Component {
                         </ButtonToolbar>
                     </Col>
                 </Row>
+            <Row>
+                <Col style={{marginBottom: '10px'}}>{this.props.goodAnswer}</Col>
+                <Col style={{marginBottom: '10px'}}>{this.props.badAnswerFirst}</Col>
+                {this.props.badAnswerSecond.trim() === '' ? '' : <Col style={{marginBottom: '10px'}}>{this.props.badAnswerSecond}</Col> }
+                {this.props.badAnswerThird.trim() === '' ? '' : <Col style={{marginBottom: '10px'}}>{this.props.badAnswerThird}</Col> }
+            </Row>
             </Container>
         )
     }
