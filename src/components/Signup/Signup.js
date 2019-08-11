@@ -35,7 +35,7 @@ class Signup extends React.Component {
         return (
             <div style={{marginTop: '50px', padding: '20px'}}>
                 <Form onSubmit={this.handleSubmit}>
-                    <Form.Group controlId="name">
+                    {/* <Form.Group controlId="name">
                         <Form.Control
                             placeholder="Name"
                             autoFocus
@@ -51,7 +51,7 @@ class Signup extends React.Component {
                             value={this.state.surname}
                             onChange={this.handleChange}
                         />
-                    </Form.Group>
+                    </Form.Group> */}
                     <Form.Group controlId="email">
                         <Form.Control
                             placeholder="Email"
