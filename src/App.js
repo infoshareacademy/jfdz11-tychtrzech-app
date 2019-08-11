@@ -2,6 +2,8 @@ import React from 'react';
 import {LoginForm, Navbar, Signup} from './components/'
 import Dashboard from './scenes/Dashboard'
 import Search from './scenes/Search'
+import firebase from 'firebase'
+
 
 import {
     Route,
@@ -30,13 +32,13 @@ class App extends React.Component {
         this.logout = this.logout.bind(this);
     }
 
-    tryLogin = () => {
-        this.setState(
-            {
-                login: true
-            }
-        );
-    };
+    // tryLogin = () => {
+    //     this.setState(
+    //         {
+    //             login: true
+    //         }
+    //     );
+    // };
 
     logout = () => {
         this.setState(
@@ -45,6 +47,16 @@ class App extends React.Component {
             }
         )
     };
+
+    componentDidMount() {
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                console.log('hejka, zalogowalem')
+                console.log(user)
+                this.setState({login: true})
+            }
+        })
+    }
 
     render() {
         return (
@@ -55,7 +67,7 @@ class App extends React.Component {
                     <Switch>
                         <Route exact path='/login' render={() => (
                             <LoginForm login={this.state.login}
-                                        tryLogin={this.tryLogin}
+                                        // tryLogin={this.tryLogin}
                             />
                             )}/>
                         <Route exact path='/signup' render={() => (

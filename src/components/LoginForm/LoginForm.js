@@ -80,6 +80,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import styles from './LoginForm.module.css'
 import { Redirect } from "react-router-dom"
+import firebase from 'firebase'
 
 
 class LoginForm extends React.Component {
@@ -104,7 +105,11 @@ class LoginForm extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
-    };
+        console.log(this.state);
+        firebase.auth()
+          .signInWithEmailAndPassword(this.state.email, this.state.password);
+    
+      };
 
 
     render() {
@@ -132,7 +137,7 @@ class LoginForm extends React.Component {
                         />
                     </Form.Group>
                     <Button
-                        onClick={() => this.props.tryLogin()}
+                        onClick={this.handleSubmit}
                         block
                         // disabled={!this.validateForm()}
                         type="submit"
