@@ -31,8 +31,11 @@ class LoginForm extends React.Component {
         event.preventDefault();
         console.log(this.state);
         firebase.auth()
-          .signInWithEmailAndPassword(this.state.email, this.state.password);
-    
+          .signInWithEmailAndPassword(this.state.email, this.state.password)
+          .then(result => {
+            alert("Zalogowano poprawnie")
+          })
+          .catch(e => alert(e.message));
       };
 
 

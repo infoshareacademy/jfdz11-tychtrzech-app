@@ -28,8 +28,11 @@ class Signup extends React.Component {
     console.log(this.state);
     firebase
       .auth()
-      .createUserWithEmailAndPassword(this.state.email, this.state.password);
-    
+      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .then(result => {
+        alert("Your account is create")
+      })
+      .catch(e => alert(e.message));
   };
 
   render() {
