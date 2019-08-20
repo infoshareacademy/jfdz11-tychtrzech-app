@@ -1,7 +1,9 @@
 import React from 'react';
-import {LoginForm, Navbar, Signup} from './components/'
+import { LoginForm, Navbar, Signup } from './components/'
 import Dashboard from './scenes/Dashboard'
 import Search from './scenes/Search'
+import firebase from 'firebase'
+
 
 import {
     Route,
@@ -10,13 +12,13 @@ import {
 } from 'react-router-dom'
 
 
-function PrivateRoute ({component: Component, authenticated, ...rest}) {
+function PrivateRoute({ component: Component, authenticated, ...rest }) {
     return (
         <Route
             {...rest}
             render={(props) => authenticated === true
                 ? <Component {...rest}{...props} />
-                : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
+                : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />}
         />
     )
 }
@@ -30,15 +32,16 @@ class App extends React.Component {
         this.logout = this.logout.bind(this);
     }
 
-    tryLogin = () => {
-        this.setState(
-            {
-                login: true
-            }
-        );
-    };
+    // tryLogin = () => {
+    //     this.setState(
+    //         {
+    //             login: true
+    //         }
+    //     );
+    // };
 
     logout = () => {
+        firebase.auth().signOut()
         this.setState(
             {
                 login: false
@@ -46,29 +49,39 @@ class App extends React.Component {
         )
     };
 
+    componentDidMount() {
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                console.log('hejka, zalogowalem')
+                console.log(user)
+                this.setState({ login: true })
+            }
+        })
+    }
+
     render() {
         return (
             <Router>
                 <div className="App">
                     <Navbar login={this.state.login}
-                    logout={this.logout}/>
+                        logout={this.logout} />
                     <Switch>
                         <Route exact path='/login' render={() => (
                             <LoginForm login={this.state.login}
-                                        tryLogin={this.tryLogin}
+                            // tryLogin={this.tryLogin}
                             />
-                            )}/>
+                        )} />
                         <Route exact path='/signup' render={() => (
-                           <Signup/>
-                        )}/>
+                            <Signup />
+                        )} />
 
                         <PrivateRoute component={Dashboard}
-                                      path="/dashboard"
-                                      authenticated={this.state.login}/>
+                            path="/dashboard"
+                            authenticated={this.state.login} />
 
                         <PrivateRoute component={Search}
-                                      path="/questions"
-                                      authenticated={this.state.login}/>
+                            path="/questions"
+                            authenticated={this.state.login} />
                         <Redirect from='/' to='/Dashboard' />
                     </Switch>
                 </div>
