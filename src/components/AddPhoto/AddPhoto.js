@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import firebase from "firebase";
 import FileUploader from "react-firebase-file-uploader";
-import CustomUploadButton from 'react-firebase-file-uploader/lib/CustomUploadButton';
 
 class AddPhoto extends Component {
   state = {

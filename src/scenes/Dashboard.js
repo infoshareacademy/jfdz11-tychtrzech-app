@@ -1,5 +1,6 @@
 import React from 'react'
 import ChartBar from "../components/ChartBar"
+import ChartLoginBar from "../components/ChartLoginBar"
 import ChartPie from "../components/ChartPie"
 import NameDash from '../components/NameDash/NameDash';
 import Row from "react-bootstrap/Row";
@@ -26,7 +27,7 @@ class Dashboard extends React.Component {
 
                 <Container>
                     <Row>
-                    
+                        <Col><ChartLoginBar /></Col>
                         <Col><ChartPie /></Col>
                         <Col><ChartBar legendPosition='bottom'/></Col>
                     </Row>

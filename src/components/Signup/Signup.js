@@ -2,6 +2,7 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import firebase from "firebase";
+import { database } from "../../Fire"
 
 class Signup extends React.Component {
   constructor(props) {
@@ -25,12 +26,17 @@ class Signup extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log(this.state);
     firebase
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then(result => {
-        alert("Your account is create")
+      .then(authUser => {
+        alert("Successfully logged.");
+        database.ref(`users/${authUser.user.uid}`).set({
+          id:authUser.user.uid,
+          email:this.state.email,
+          date: new Date().toLocaleDateString()
+        })
+
       })
       .catch(e => alert(e.message));
   };
