@@ -1,0 +1,15 @@
+.avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 50px;
+    
+}
+.form {
+    border: none;
+    
+}
+.avatar__wrapper {
+   display: flex;
+   justify-content: center;
+}

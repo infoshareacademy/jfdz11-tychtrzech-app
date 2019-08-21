@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import firebase from "firebase";
 import FileUploader from "react-firebase-file-uploader";
+import Avatar from "./Avatar.css"
 
 class AddPhoto extends Component {
   state = {
@@ -20,7 +21,7 @@ class AddPhoto extends Component {
     console.error(error);
   };
   handleUploadSuccess = filename => {
-    this.setState({ avatar: filename, progress: 100, isUploading: false });
+    this.setState({  progress: 100, isUploading: false });
     firebase
       .storage()
       .ref("images")
@@ -31,13 +32,14 @@ class AddPhoto extends Component {
  
   render() {
     return (
-      <div>
-        <form>
+      <div className="avatar__wrapper">
+        <form >
 
-          <label>Avatar:</label>
+          
           {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
-          {this.state.avatarURL && <img src={this.state.avatarURL} />}
-          <FileUploader
+          {this.state.avatarURL && <div className="avatar__wrapper"><img src={this.state.avatarURL} className="avatar"/></div>}
+         <div classname="uploader">
+          <FileUploader className="form"
             accept="image/*"
             name="avatar"
             randomizeFilename
@@ -47,6 +49,7 @@ class AddPhoto extends Component {
             onUploadSuccess={this.handleUploadSuccess}
             onProgress={this.handleProgress}
           />
+        </div>
         </form>
       </div>
     );
