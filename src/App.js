@@ -32,13 +32,6 @@ class App extends React.Component {
         this.logout = this.logout.bind(this);
     }
 
-    // tryLogin = () => {
-    //     this.setState(
-    //         {
-    //             login: true
-    //         }
-    //     );
-    // };
 
     logout = () => {
         firebase.auth().signOut()
@@ -52,8 +45,6 @@ class App extends React.Component {
     componentDidMount() {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                console.log('hejka, zalogowalem')
-                console.log(user)
                 this.setState({ login: true })
             }
         })

@@ -3,6 +3,7 @@ import firebase from "firebase";
 import FileUploader from "react-firebase-file-uploader";
 import Avatar from "./Avatar.css"
 
+
 class AddPhoto extends Component {
   state = {
     username: "",
@@ -48,6 +49,8 @@ class AddPhoto extends Component {
             onUploadError={this.handleUploadError}
             onUploadSuccess={this.handleUploadSuccess}
             onProgress={this.handleProgress}
+            style={{backgroundColor: '#0069d9', color: 'white', padding: 10, borderRadius: 4}}
+            
           />
         </div>
         </form>

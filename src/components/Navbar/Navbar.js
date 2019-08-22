@@ -31,6 +31,9 @@ function Navbar(props) {
         <NavLink className={headerNavUlLiA} exact to="/questions">
           Database
         </NavLink>
+        <NavLink className={headerNavUlLiA} exact to="/profile">
+          Profile
+        </NavLink>
         <NavLink className={headerNavUlLiA} exact to="/dashboard" onClick={logout}>
           Logout
         </NavLink>
