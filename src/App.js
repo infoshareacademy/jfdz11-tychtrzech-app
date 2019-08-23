@@ -3,6 +3,7 @@ import { LoginForm, Navbar, Signup } from './components/'
 import Dashboard from './scenes/Dashboard'
 import Search from './scenes/Search'
 import firebase from 'firebase'
+import profile from "./scenes/profile"
 
 
 import {
@@ -72,6 +73,9 @@ class App extends React.Component {
 
                         <PrivateRoute component={Search}
                             path="/questions"
+                            authenticated={this.state.login} />
+                            <PrivateRoute component={profile}
+                            path="/profile"
                             authenticated={this.state.login} />
                         <Redirect from='/' to='/Dashboard' />
                     </Switch>

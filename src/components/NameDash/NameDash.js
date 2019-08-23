@@ -2,7 +2,7 @@ import React from 'react'
 import style from './NameDash.module.css'
 import CountUp from 'react-countup';
 import QUESTIONS from "../../questions";
-import AddPhoto from '../AddPhoto/AddPhoto'
+import AddPhoto from '../AddPhoto/AddPhoto';
 
  
 
@@ -13,7 +13,7 @@ const NameDash = () => {
 <div>
     
    
-    <div className={dupa1}>Test User</div>
+    <div className={dupa1}>Witaj Test User</div>
    <AddPhoto />
     <div className={dupa2}>
 

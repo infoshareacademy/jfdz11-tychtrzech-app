@@ -7,6 +7,8 @@ import {
 } from "./Navbar.module.css";
 import Logo from "../Logo/Logo";
 
+
+
 function Navbar(props) {
   const {login, logout} = props;
   if(!login){
@@ -31,12 +33,13 @@ function Navbar(props) {
         <NavLink className={headerNavUlLiA} exact to="/questions">
           Database
         </NavLink>
-        <NavLink className={headerNavUlLiA} exact to="/profile">
-          Profile
-        </NavLink>
+     
+      
+                
         <NavLink className={headerNavUlLiA} exact to="/dashboard" onClick={logout}>
           Logout
         </NavLink>
+     
       </nav>
     </header>
   );

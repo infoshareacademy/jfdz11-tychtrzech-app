@@ -1,0 +1,20 @@
+.avatarIcon{
+    width: 350px;
+    height: 400px;
+    border-radius: 2px;
+    border: 1px solid #0069d9;
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+
+}
+.iconCointainer{
+    
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    
+}
+

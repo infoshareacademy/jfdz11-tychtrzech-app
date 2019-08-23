@@ -13,8 +13,7 @@ class AddPhoto extends Component {
     avatarURL: ""
   };
  
-  handleChangeUsername = event =>
-    this.setState({ username: event.target.value });
+  
   handleUploadStart = () => this.setState({ isUploading: true, progress: 0 });
   handleProgress = progress => this.setState({ progress });
   handleUploadError = error => {
@@ -33,12 +32,12 @@ class AddPhoto extends Component {
  
   render() {
     return (
-      <div className="avatar__wrapper">
+      <div >
         <form >
 
           
           {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
-          {this.state.avatarURL && <div className="avatar__wrapper"><img src={this.state.avatarURL} className="avatar"/></div>}
+          {this.state.avatarURL && <div className="avatar__wrapper"><img src={this.state.avatarURL} className="roundAvatar"/></div>}
          <div classname="uploader">
           <FileUploader className="form"
             accept="image/*"
@@ -49,7 +48,6 @@ class AddPhoto extends Component {
             onUploadError={this.handleUploadError}
             onUploadSuccess={this.handleUploadSuccess}
             onProgress={this.handleProgress}
-            style={{backgroundColor: '#0069d9', color: 'white', padding: 10, borderRadius: 4}}
             
           />
         </div>
